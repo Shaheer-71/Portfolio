@@ -1,6 +1,6 @@
 import { createInterviewEvent, checkConflict } from '../services/calendar.js'
 import { sendScheduleEmails } from '../services/email.js'
-import { sendTelegramMessage } from '../services/telegram.js'
+import { sendWhatsAppMessage } from '../services/whatsapp.js'
 
 const SYSTEM_PROMPT = `You are Shaheer's AI portfolio assistant. Answer questions about Muhammad Shaheer Gul's background, skills, and projects.
 
@@ -129,8 +129,8 @@ async function runTool(name, args) {
 
     await Promise.allSettled([
       sendScheduleEmails({ name: visitorName, email, date, time, purpose, eventLink }),
-      sendTelegramMessage(
-        `🗓️ <b>Interview via Chatbot!</b>\n\n<b>${visitorName}</b> (${email})\n📅 ${date} at ${time} AST\n💬 ${purpose || 'General'}`
+      sendWhatsAppMessage(
+        `🗓️ Interview via Chatbot!\n\n${visitorName} (${email})\n📅 ${date} at ${time} AST\n💬 ${purpose || 'General'}`
       ),
     ])
 

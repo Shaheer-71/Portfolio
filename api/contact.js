@@ -1,5 +1,5 @@
 import { sendContactEmails } from '../services/email.js'
-import { sendTelegramMessage } from '../services/telegram.js'
+import { sendWhatsAppMessage } from '../services/whatsapp.js'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
@@ -13,12 +13,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address.' })
   }
 
-  // Both notifications run in parallel; errors are non-fatal
   await Promise.allSettled([
     sendContactEmails({ name, email, message }),
-    sendTelegramMessage(
-      `📨 <b>New Portfolio Message</b>\n\n<b>${name}</b> (${email})\n\n${message.slice(0, 500)}`
-    ),
+    sendWhatsAppMessage(`📨 New Portfolio Message\n\n${name} (${email})\n\n${message.slice(0, 300)}`),
   ])
 
   return res.status(200).json({ success: true })
