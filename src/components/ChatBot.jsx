@@ -33,7 +33,7 @@ function renderMarkdown(text) {
   const lines = text.split('\n')
   return lines.map((line, i) => {
     const t = line.trim()
-    if (!t) return <div key={i} style={{ height: 5 }} />
+    if (!t) return <div key={i} style={{ height: 3 }} />
 
     // Bullet: -, *, •
     const bulletMatch = t.match(/^[-*•]\s+(.+)/)
