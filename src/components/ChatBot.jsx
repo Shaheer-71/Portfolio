@@ -4,19 +4,13 @@ import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react'
 
 const WELCOME = `Hi! I'm Shaheer's AI assistant. 👋
 
-I know everything about Muhammad Shaheer Gul — his skills, projects, work experience, certifications, and more.
-
-Ask me anything like:
-• "What projects has Shaheer built?"
-• "What are his main skills?"
-• "Is he available for hire?"
-• "Tell me about AI Attorney"`
+Ask me about his skills, projects, experience — or schedule an interview directly here.`
 
 const SUGGESTIONS = [
-  "What are Shaheer's main skills?",
+  "What are his main skills?",
   'Tell me about his best project',
   'Is he available for hire?',
-  'What tech stack does he use?',
+  'Can you schedule a meeting?',
 ]
 
 // Render **bold**, bullet lines, numbered lists, headers
