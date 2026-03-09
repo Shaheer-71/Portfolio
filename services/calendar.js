@@ -1,12 +1,7 @@
 import { google } from 'googleapis'
 
-/**
- * Creates a Google Calendar event with a Meet link.
- * Returns { eventLink, meetLink } or null if credentials are not configured.
- */
-export async function createInterviewEvent({ name, email, date, time, purpose }) {
-  const { GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, GOOGLE_CALENDAR_ID, OWNER_EMAIL } = process.env
-
+function getCalendar() {
+  const { GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY } = process.env
   if (!GOOGLE_CLIENT_EMAIL || !GOOGLE_PRIVATE_KEY) return null
 
   const auth = new google.auth.GoogleAuth({
@@ -16,15 +11,23 @@ export async function createInterviewEvent({ name, email, date, time, purpose })
     },
     scopes: ['https://www.googleapis.com/auth/calendar'],
   })
+  return google.calendar({ version: 'v3', auth })
+}
 
-  const calendar = google.calendar({ version: 'v3', auth })
+const calendarId = () => process.env.GOOGLE_CALENDAR_ID || 'primary'
+
+// ── Create event ────────────────────────────────────────────────────────────
+
+export async function createInterviewEvent({ name, email, date, time, purpose }) {
+  const calendar = getCalendar()
+  if (!calendar) return null
 
   // AST = UTC+3
   const start = new Date(`${date}T${time}:00+03:00`)
   const end   = new Date(start.getTime() + 60 * 60 * 1000)
 
   const { data } = await calendar.events.insert({
-    calendarId: GOOGLE_CALENDAR_ID || 'primary',
+    calendarId: calendarId(),
     requestBody: {
       summary: `Interview with ${name} — Shaheer Gul`,
       description: `Portfolio interview request\nPurpose: ${purpose || 'General discussion'}\nContact: ${email}\n\nVisitor will be notified via email.`,
@@ -33,5 +36,25 @@ export async function createInterviewEvent({ name, email, date, time, purpose })
     },
   })
 
-  return { eventLink: data.htmlLink, meetLink: data.hangoutLink }
+  return { eventLink: data.htmlLink }
+}
+
+// ── Check conflict ──────────────────────────────────────────────────────────
+
+export async function checkConflict(date, time) {
+  const calendar = getCalendar()
+  if (!calendar) return false // assume free if calendar not configured
+
+  const start = new Date(`${date}T${time}:00+03:00`)
+  const end   = new Date(start.getTime() + 60 * 60 * 1000)
+
+  const { data } = await calendar.events.list({
+    calendarId: calendarId(),
+    timeMin: start.toISOString(),
+    timeMax: end.toISOString(),
+    singleEvents: true,
+    orderBy: 'startTime',
+  })
+
+  return data.items.length > 0
 }
