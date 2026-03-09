@@ -235,7 +235,7 @@ export default function ChatBot({ isOpen, onClose }) {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: '#10b981' }}>
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-                    Online · Powered by Claude AI
+                    Online · Assistant
                   </div>
                 </div>
               </div>

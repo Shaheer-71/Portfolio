@@ -47,7 +47,7 @@ export default function Hero({ onChatOpen }) {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 24px', width: '100%', paddingTop: 96 }}>
+      <div className="hero-content" style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 24px', width: '100%', paddingTop: 96 }}>
         <div style={{ maxWidth: 760 }}>
 
           {/* Available badge */}
@@ -106,6 +106,7 @@ export default function Hero({ onChatOpen }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.55 }}
+            className="hero-stats"
             style={{
               display: 'inline-flex', flexWrap: 'wrap', gap: 0, marginBottom: 48,
               background: '#111115', border: '1px solid rgba(255,255,255,0.07)',
@@ -115,8 +116,9 @@ export default function Hero({ onChatOpen }) {
             {personal.stats.map((stat, i) => (
               <div
                 key={stat.label}
+                className="hero-stat-item"
                 style={{
-                  padding: '18px 28px', display: 'flex', flexDirection: 'column', gap: 4,
+                  padding: '18px 24px', display: 'flex', flexDirection: 'column', gap: 4,
                   borderRight: i < personal.stats.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
                 }}
               >

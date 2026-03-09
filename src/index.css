@@ -111,3 +111,25 @@ body {
 .chat-scroll::-webkit-scrollbar { width: 2px; }
 .chat-scroll::-webkit-scrollbar-track { background: transparent; }
 .chat-scroll::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 2px; }
+
+/* ─── Responsive layout helpers ─────────────────────── */
+.nav-desktop-links { display: flex; align-items: center; gap: 2px; }
+.nav-hamburger     { display: none; background: none; border: none; cursor: pointer; color: #a1a1aa; padding: 4px; }
+
+@media (max-width: 768px) {
+  /* Navbar */
+  .nav-desktop-links { display: none !important; }
+  .nav-hamburger     { display: flex !important; align-items: center; justify-content: center; }
+
+  /* Reduce section vertical padding */
+  section { padding-top: 64px !important; padding-bottom: 64px !important; }
+
+  /* Hero content top padding */
+  .hero-content { padding-top: 80px !important; }
+
+  /* Hero stats: 2-column grid */
+  .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr; width: 100% !important; }
+  .hero-stat-item { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .hero-stat-item:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,0.07) !important; }
+  .hero-stat-item:last-child, .hero-stat-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+}

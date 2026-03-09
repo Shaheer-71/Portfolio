@@ -63,7 +63,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <div className="nav-desktop-links">
           {links.map(l => {
             const isActive = active === l.href.slice(1)
             return (
@@ -89,9 +89,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile */}
-        <button onClick={() => setOpen(!open)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', color: '#a1a1aa' }}
-          className="md:hidden block">
+        <button onClick={() => setOpen(!open)} className="nav-hamburger">
           {open ? <X size={20}/> : <Menu size={20}/>}
         </button>
       </div>
