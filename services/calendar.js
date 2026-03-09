@@ -25,23 +25,11 @@ export async function createInterviewEvent({ name, email, date, time, purpose })
 
   const { data } = await calendar.events.insert({
     calendarId: GOOGLE_CALENDAR_ID || 'primary',
-    conferenceDataVersion: 1,
-    sendUpdates: 'all',
     requestBody: {
       summary: `Interview with ${name} — Shaheer Gul`,
-      description: `Portfolio interview request\nPurpose: ${purpose || 'General discussion'}\nContact: ${email}`,
+      description: `Portfolio interview request\nPurpose: ${purpose || 'General discussion'}\nContact: ${email}\n\nVisitor will be notified via email.`,
       start: { dateTime: start.toISOString(), timeZone: 'Asia/Riyadh' },
       end:   { dateTime: end.toISOString(),   timeZone: 'Asia/Riyadh' },
-      attendees: [
-        { email: OWNER_EMAIL || 'devshaheer360@gmail.com' },
-        { email, displayName: name },
-      ],
-      conferenceData: {
-        createRequest: {
-          requestId: `portfolio-${Date.now()}`,
-          conferenceSolutionKey: { type: 'hangoutsMeet' },
-        },
-      },
     },
   })
 
