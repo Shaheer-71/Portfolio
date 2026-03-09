@@ -19,6 +19,48 @@ const SUGGESTIONS = [
   'What tech stack does he use?',
 ]
 
+// Render **bold**, bullet lines, numbered lists, headers
+function renderInline(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return parts.map((part, i) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i} style={{ color: '#e4e4e7', fontWeight: 600 }}>{part.slice(2, -2)}</strong>
+      : part
+  )
+}
+
+function renderMarkdown(text) {
+  const lines = text.split('\n')
+  return lines.map((line, i) => {
+    const t = line.trim()
+    if (!t) return <div key={i} style={{ height: 5 }} />
+
+    // Bullet: -, *, •
+    const bulletMatch = t.match(/^[-*•]\s+(.+)/)
+    if (bulletMatch) return (
+      <div key={i} style={{ display: 'flex', gap: 7, paddingLeft: 2, marginTop: 1 }}>
+        <span style={{ color: '#6366f1', flexShrink: 0, marginTop: 1 }}>▸</span>
+        <span>{renderInline(bulletMatch[1])}</span>
+      </div>
+    )
+
+    // Numbered list: 1. 2. 3.
+    const numMatch = t.match(/^(\d+)\.\s+(.+)/)
+    if (numMatch) return (
+      <div key={i} style={{ display: 'flex', gap: 7, paddingLeft: 2, marginTop: 1 }}>
+        <span style={{ color: '#6366f1', flexShrink: 0, minWidth: 14 }}>{numMatch[1]}.</span>
+        <span>{renderInline(numMatch[2])}</span>
+      </div>
+    )
+
+    // Header ## or ###
+    if (t.startsWith('### ')) return <div key={i} style={{ fontWeight: 700, color: '#f4f4f5', marginTop: 6 }}>{renderInline(t.slice(4))}</div>
+    if (t.startsWith('## '))  return <div key={i} style={{ fontWeight: 700, color: '#f4f4f5', marginTop: 6 }}>{renderInline(t.slice(3))}</div>
+
+    return <div key={i}>{renderInline(t)}</div>
+  })
+}
+
 function Message({ msg }) {
   const isBot = msg.role === 'assistant'
   return (
@@ -43,16 +85,12 @@ function Message({ msg }) {
       <div style={{
         maxWidth: '80%', padding: '10px 14px',
         borderRadius: isBot ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
-        background: isBot
-          ? '#18181c'
-          : 'rgba(99,102,241,0.15)',
-        border: isBot
-          ? '1px solid rgba(255,255,255,0.07)'
-          : '1px solid rgba(99,102,241,0.3)',
-        fontSize: 13, lineHeight: 1.7, color: '#f4f4f5',
-        whiteSpace: 'pre-wrap',
+        background: isBot ? '#18181c' : 'rgba(99,102,241,0.15)',
+        border: isBot ? '1px solid rgba(255,255,255,0.07)' : '1px solid rgba(99,102,241,0.3)',
+        fontSize: 13, lineHeight: 1.7, color: '#a1a1aa',
+        display: 'flex', flexDirection: 'column', gap: 1,
       }}>
-        {msg.content}
+        {isBot ? renderMarkdown(msg.content) : msg.content}
       </div>
       {!isBot && (
         <div style={{
