@@ -28,54 +28,63 @@ export const skills = [
     color: 'cyan',
     items: [
       { name: 'React.js', level: 'Advanced' },
-      { name: 'Next.js', level: 'Advanced' },
-      { name: 'TypeScript', level: 'Intermediate' },
-      { name: 'JavaScript (ES6+)', level: 'Advanced' },
-      { name: 'HTML5 / CSS3', level: 'Advanced' },
-      { name: 'Tailwind CSS', level: 'Advanced' },
-      { name: 'Material UI', level: 'Advanced' },
-    ],
-  },
-  {
-    category: 'Mobile',
-    icon: '📱',
-    color: 'purple',
-    items: [
       { name: 'React Native', level: 'Advanced' },
+      { name: 'JavaScript', level: 'Advanced' },
+      { name: 'TypeScript', level: 'Intermediate' },
+      { name: 'Tailwind CSS', level: 'Advanced' },
       { name: 'Redux Toolkit', level: 'Advanced' },
-      { name: 'RTK Query', level: 'Advanced' },
-      { name: 'React Navigation', level: 'Advanced' },
-      { name: 'Cross-platform Dev', level: 'Advanced' },
-      { name: 'NativeWind', level: 'Advanced' },
-      { name: 'Reanimated', level: 'Intermediate' },
     ],
   },
   {
-    category: 'Backend & DB',
+    category: 'Backend & APIs',
     icon: '🔧',
-    color: 'green',
+    color: 'purple',
     items: [
       { name: 'Node.js', level: 'Intermediate' },
       { name: 'Express.js', level: 'Intermediate' },
-      { name: 'RESTful APIs', level: 'Advanced' },
-      { name: 'GraphQL', level: 'Advanced' },
-      { name: 'PostgreSQL', level: 'Intermediate' },
-      { name: 'MongoDB', level: 'Intermediate' },
-      { name: 'Firebase', level: 'Intermediate' },
+      { name: 'GraphQL', level: 'Intermediate' },
+      { name: 'Socket.io', level: 'Advanced' },
+      { name: 'JWT / RBAC', level: 'Intermediate' },
+      { name: 'C# MVC', level: 'Beginner' },
     ],
   },
   {
-    category: 'Cloud & DevOps',
+    category: 'Databases',
+    icon: '🗄️',
+    color: 'green',
+    items: [
+      { name: 'PostgreSQL', level: 'Intermediate' },
+      { name: 'SQL', level: 'Intermediate' },
+      { name: 'NoSQL / MongoDB', level: 'Intermediate' },
+      { name: 'Firebase', level: 'Intermediate' },
+      { name: 'Supabase', level: 'Intermediate' },
+      { name: 'Snowflake', level: 'Beginner' },
+    ],
+  },
+  {
+    category: 'DevOps & Deploy',
     icon: '☁️',
     color: 'pink',
     items: [
+      { name: 'CI/CD', level: 'Intermediate' },
+      { name: 'Vercel', level: 'Intermediate' },
+      { name: 'Nginx', level: 'Beginner' },
       { name: 'AWS (S3, EC2)', level: 'Intermediate' },
       { name: 'Docker', level: 'Intermediate' },
-      { name: 'CI/CD', level: 'Intermediate' },
-      { name: 'Git / Agile / Scrum', level: 'Advanced' },
-      { name: 'JWT / RBAC', level: 'Intermediate' },
-      { name: 'Socket.io', level: 'Advanced' },
-      { name: 'API Design', level: 'Intermediate' },
+      { name: 'Git / Agile', level: 'Advanced' },
+    ],
+  },
+  {
+    category: 'Data Engineering',
+    icon: '📊',
+    color: 'cyan',
+    items: [
+      { name: 'Python ETL', level: 'Intermediate' },
+      { name: 'Pandas', level: 'Intermediate' },
+      { name: 'dbt', level: 'Beginner' },
+      { name: 'Airflow', level: 'Beginner' },
+      { name: 'Power BI', level: 'Intermediate' },
+      { name: 'Snowflake', level: 'Beginner' },
     ],
   },
 ]
@@ -322,12 +331,11 @@ Full Stack Developer specializing in React and React Native with 5+ years buildi
 - Performance profiling and optimization with Flipper
 
 ## Skills
-- **Frontend**: React.js, Next.js, TypeScript, JavaScript (ES6+), HTML5/CSS3, Tailwind CSS, Material UI — Advanced
-- **Mobile**: React Native, Redux Toolkit, RTK Query, React Navigation, NativeWind, Reanimated — Advanced
-- **Backend**: Node.js, Express.js, RESTful APIs, GraphQL — Intermediate
-- **Databases**: PostgreSQL, MongoDB, Firebase — Intermediate
-- **Cloud/DevOps**: AWS (S3, EC2), Docker, CI/CD, Git — Intermediate
-- **Other**: Socket.io, JWT/RBAC, Performance Optimization, Debugging — Advanced
+- **Frontend**: React.js, React Native, JavaScript, TypeScript, Tailwind CSS, Redux Toolkit — Advanced
+- **Backend / APIs**: Node.js, Express.js, GraphQL, Socket.io, JWT/RBAC, C# MVC
+- **Databases / Storage**: PostgreSQL, SQL, NoSQL/MongoDB, Firebase, Supabase, Snowflake
+- **DevOps / Deploy**: CI/CD, Vercel, Nginx, AWS (S3, EC2), Docker, Git
+- **Data Engineering**: Python ETL, Pandas, dbt, Airflow, Power BI, Snowflake
 
 ## Certifications
 - OCI 2025 Certified AI Foundations Associate — Oracle (Sep 2025)

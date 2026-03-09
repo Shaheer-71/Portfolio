@@ -34,14 +34,11 @@ Full Stack Developer specializing in React and React Native with 5+ years buildi
 - Xcelerate: Field Services Platform — fixed critical geofencing bug, replaced notification system
 
 ## Technical Skills
-- Frontend: React.js, Next.js, HTML5/CSS3, Tailwind CSS (Advanced)
-- Mobile: React Native, NativeWind, Reanimated (Advanced)
-- State Management: Redux Toolkit, RTK Query, Context API (Advanced)
-- Backend: Node.js, Express.js, RESTful APIs, GraphQL (Intermediate)
-- Databases: PostgreSQL, MongoDB, Firebase (Intermediate)
-- Cloud/DevOps: AWS S3/EC2, Docker, CI/CD (Intermediate)
-- Real-time: Socket.io, Firebase Real-Time DB (Advanced)
-- Languages: TypeScript, JavaScript ES6+
+- Frontend: React.js, React Native, JavaScript, TypeScript, Tailwind CSS, Redux Toolkit (Advanced)
+- Backend / APIs: Node.js, Express.js, GraphQL, Socket.io, JWT/RBAC, C# MVC
+- Databases / Storage: PostgreSQL, SQL, NoSQL/MongoDB, Firebase, Supabase, Snowflake
+- DevOps / Deploy: CI/CD, Vercel, Nginx, AWS (S3, EC2), Docker, Git
+- Data Engineering: Python ETL, Pandas, dbt, Airflow, Power BI, Snowflake
 
 ## Certifications
 - OCI 2025 Certified AI Foundations Associate — Oracle
