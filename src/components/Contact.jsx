@@ -1,8 +1,134 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Send, Calendar, CheckCircle, User, MessageSquare } from 'lucide-react'
 import { personal } from '../data/portfolio'
+import ScheduleCall from './ScheduleCall'
+
+const input = {
+  width: '100%', padding: '11px 14px', borderRadius: 8, fontSize: 13,
+  background: '#0d0d10', border: '1px solid rgba(255,255,255,0.08)', color: '#f4f4f5',
+  outline: 'none', boxSizing: 'border-box',
+}
+
+function ContactForm() {
+  const [form, setForm]     = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState(null) // null | 'loading' | 'success' | 'error'
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('loading')
+    setErrorMsg('')
+    try {
+      const res  = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setStatus('success')
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+        setErrorMsg(data.error || 'Failed to send. Please try emailing directly.')
+      }
+    } catch {
+      setStatus('error')
+      setErrorMsg('Network error. Please try emailing directly.')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div style={{ textAlign: 'center', padding: '24px 0' }}>
+        <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+          <CheckCircle size={24} color="#10b981" />
+        </div>
+        <h4 style={{ color: '#f4f4f5', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Message Sent!</h4>
+        <p style={{ color: '#71717a', fontSize: 13, lineHeight: 1.6, margin: '0 0 16px' }}>
+          I'll get back to you within 24 hours.<br />Check your inbox for a confirmation.
+        </p>
+        <button onClick={() => setStatus(null)}
+          style={{ background: 'none', border: 'none', color: '#52525b', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}>
+          Send another
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+        <div style={{ position: 'relative' }}>
+          <User size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+          <input
+            style={{ ...input, paddingLeft: 34 }}
+            placeholder="Your Name"
+            value={form.name}
+            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+            required
+          />
+        </div>
+        <div style={{ position: 'relative' }}>
+          <Mail size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+          <input
+            style={{ ...input, paddingLeft: 34 }}
+            type="email"
+            placeholder="Your Email"
+            value={form.email}
+            onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+            required
+          />
+        </div>
+      </div>
+
+      <div style={{ position: 'relative' }}>
+        <MessageSquare size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: 12, pointerEvents: 'none' }} />
+        <textarea
+          style={{ ...input, paddingLeft: 34, resize: 'none', height: 110, lineHeight: 1.6 }}
+          placeholder="Your message…"
+          value={form.message}
+          onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+          required
+          rows={4}
+        />
+      </div>
+
+      {status === 'error' && (
+        <p style={{ margin: 0, fontSize: 13, color: '#f87171', background: 'rgba(248,113,113,0.08)', padding: '10px 14px', borderRadius: 8 }}>
+          {errorMsg}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === 'loading'}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          padding: '13px', borderRadius: 10, fontSize: 14, fontWeight: 700,
+          background: status === 'loading' ? 'rgba(99,102,241,0.4)' : '#6366f1',
+          border: '1px solid #6366f1', color: '#fff', cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+          opacity: status === 'loading' ? 0.7 : 1, transition: 'background 0.2s, transform 0.15s',
+        }}
+        onMouseEnter={e => { if (status !== 'loading') e.currentTarget.style.background = '#5558e3' }}
+        onMouseLeave={e => { if (status !== 'loading') e.currentTarget.style.background = '#6366f1' }}
+      >
+        <Send size={15} />
+        {status === 'loading' ? 'Sending…' : 'Send Message'}
+      </button>
+    </form>
+  )
+}
+
+const TABS = [
+  { label: 'Send Message',        icon: Send,     id: 'message' },
+  { label: 'Schedule Interview',  icon: Calendar, id: 'schedule' },
+]
 
 export default function Contact() {
+  const [activeTab, setActiveTab] = useState(0)
+
   return (
     <section id="contact" style={{ padding: '108px 0', background: 'rgba(17,17,21,0.6)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
@@ -58,12 +184,11 @@ export default function Contact() {
                       {label}
                     </div>
                     {href ? (
-                      <a
-                        href={href}
-                        style={{ fontSize: 14, color: '#a1a1aa', textDecoration: 'none', transition: 'color 0.2s' }}
+                      <a href={href} style={{ fontSize: 14, color: '#a1a1aa', textDecoration: 'none', transition: 'color 0.2s' }}
                         onMouseEnter={e => e.target.style.color = color}
-                        onMouseLeave={e => e.target.style.color = '#a1a1aa'}
-                      >{value}</a>
+                        onMouseLeave={e => e.target.style.color = '#a1a1aa'}>
+                        {value}
+                      </a>
                     ) : (
                       <span style={{ fontSize: 14, color: '#a1a1aa' }}>{value}</span>
                     )}
@@ -79,22 +204,12 @@ export default function Contact() {
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 {[
-                  { icon: Github,   href: personal.github,              label: 'GitHub',   hoverColor: '#f4f4f5' },
-                  { icon: Linkedin, href: personal.linkedin,             label: 'LinkedIn', hoverColor: '#0077b5' },
-                  { icon: Mail,     href: `mailto:${personal.email}`,   label: 'Email',    hoverColor: '#6366f1' },
+                  { icon: Github,   href: personal.github,            label: 'GitHub',   hoverColor: '#f4f4f5' },
+                  { icon: Linkedin, href: personal.linkedin,           label: 'LinkedIn', hoverColor: '#0077b5' },
+                  { icon: Mail,     href: `mailto:${personal.email}`, label: 'Email',    hoverColor: '#6366f1' },
                 ].map(({ icon: Icon, href, label, hoverColor }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    title={label}
-                    style={{
-                      width: 44, height: 44, borderRadius: 10,
-                      background: '#18181c', border: '1px solid rgba(255,255,255,0.07)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#52525b', textDecoration: 'none', transition: 'all 0.2s ease',
-                    }}
+                  <a key={label} href={href} target="_blank" rel="noreferrer" title={label}
+                    style={{ width: 44, height: 44, borderRadius: 10, background: '#18181c', border: '1px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#52525b', textDecoration: 'none', transition: 'all 0.2s ease' }}
                     onMouseEnter={e => { e.currentTarget.style.color = hoverColor; e.currentTarget.style.borderColor = `${hoverColor}35`; e.currentTarget.style.background = `${hoverColor}10` }}
                     onMouseLeave={e => { e.currentTarget.style.color = '#52525b'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.background = '#18181c' }}
                   >
@@ -106,78 +221,47 @@ export default function Contact() {
 
             {/* Open to work chip */}
             <div style={{ marginTop: 32 }}>
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', gap: 7,
-                padding: '6px 14px', borderRadius: 100, fontSize: 12, fontWeight: 600,
-                background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', color: '#10b981',
-              }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 14px', borderRadius: 100, fontSize: 12, fontWeight: 600, background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', color: '#10b981' }}>
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
                 Open to work
               </span>
             </div>
           </motion.div>
 
-          {/* Right: CTA card */}
+          {/* Right: Tabbed form */}
           <motion.div
             initial={{ opacity: 0, x: 36 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div style={{
-              background: '#111115', border: '1px solid rgba(255,255,255,0.07)',
-              borderRadius: 16, padding: 40, textAlign: 'center',
-            }}>
-              <h3 style={{ fontSize: 22, fontWeight: 800, color: '#f4f4f5', marginBottom: 12, letterSpacing: '-0.02em' }}>
-                Ready to Build Together?
-              </h3>
-              <p style={{ color: '#71717a', lineHeight: 1.75, marginBottom: 32, fontSize: 14 }}>
-                Available for full-time positions, freelance projects, and exciting collaborations. 5+ years of experience and a proven track record — let's create something great.
-              </p>
+            <div style={{ background: '#111115', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 32 }}>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {/* Email button */}
-                <a
-                  href={`mailto:${personal.email}`}
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                    padding: '14px', borderRadius: 10, fontSize: 14, fontWeight: 700,
-                    background: '#6366f1', border: '1px solid #6366f1', color: '#fff', textDecoration: 'none',
-                    transition: 'background 0.2s, transform 0.2s',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.background = '#5558e3'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = '#6366f1'; e.currentTarget.style.transform = 'translateY(0)' }}
-                >
-                  <Mail size={16} />
-                  Send an Email
-                </a>
-
-                {/* Call button */}
-                <a
-                  href={`tel:${personal.phone}`}
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                    padding: '14px', borderRadius: 10, fontSize: 14, fontWeight: 700,
-                    background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#a1a1aa', textDecoration: 'none',
-                    transition: 'border-color 0.2s, color 0.2s, transform 0.2s',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.color = '#f4f4f5'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.transform = 'translateY(0)' }}
-                >
-                  <Phone size={16} />
-                  Schedule a Call
-                </a>
+              {/* Tab switcher */}
+              <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: '#0d0d10', borderRadius: 10, padding: 4 }}>
+                {TABS.map(({ label, icon: Icon }, i) => (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => setActiveTab(i)}
+                    style={{
+                      flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                      padding: '9px 10px', borderRadius: 7, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
+                      background: activeTab === i ? '#1c1c22' : 'transparent',
+                      color: activeTab === i ? '#f4f4f5' : '#52525b',
+                      boxShadow: activeTab === i ? '0 1px 3px rgba(0,0,0,0.4)' : 'none',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Icon size={13} color={activeTab === i ? (i === 0 ? '#6366f1' : '#8b5cf6') : '#52525b'} />
+                    {label}
+                  </button>
+                ))}
               </div>
 
-              {/* Status row */}
-              <div style={{
-                marginTop: 24, padding: '12px 16px', borderRadius: 10,
-                background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.15)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              }}>
-                <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-                <span style={{ fontSize: 13, color: '#10b981', fontWeight: 600 }}>Available · Transferable Iqama</span>
-              </div>
+              {/* Tab content */}
+              {activeTab === 0 ? <ContactForm /> : <ScheduleCall />}
+
             </div>
           </motion.div>
 
