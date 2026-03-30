@@ -4,15 +4,15 @@ import { Mail, Phone, MapPin, Github, Linkedin, Send, Calendar, CheckCircle, Use
 import { personal } from '../data/portfolio'
 import ScheduleCall from './ScheduleCall'
 
-const input = {
+const inputStyle = {
   width: '100%', padding: '11px 14px', borderRadius: 8, fontSize: 13,
-  background: '#0d0d10', border: '1px solid rgba(255,255,255,0.08)', color: '#f4f4f5',
-  outline: 'none', boxSizing: 'border-box',
+  background: 'var(--surface2)', border: '1px solid var(--border)', color: 'var(--text)',
+  outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s',
 }
 
 function ContactForm() {
   const [form, setForm]     = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState(null) // null | 'loading' | 'success' | 'error'
+  const [status, setStatus] = useState(null)
   const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e) => {
@@ -45,12 +45,12 @@ function ContactForm() {
         <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
           <CheckCircle size={24} color="#10b981" />
         </div>
-        <h4 style={{ color: '#f4f4f5', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Message Sent!</h4>
-        <p style={{ color: '#71717a', fontSize: 13, lineHeight: 1.6, margin: '0 0 16px' }}>
+        <h4 style={{ color: 'var(--text)', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Message Sent!</h4>
+        <p style={{ color: 'var(--text-muted)', fontSize: 13, lineHeight: 1.6, margin: '0 0 16px' }}>
           I'll get back to you within 24 hours.<br />Check your inbox for a confirmation.
         </p>
         <button onClick={() => setStatus(null)}
-          style={{ background: 'none', border: 'none', color: '#52525b', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}>
+          style={{ background: 'none', border: 'none', color: 'var(--text-dim)', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}>
           Send another
         </button>
       </div>
@@ -61,9 +61,9 @@ function ContactForm() {
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
         <div style={{ position: 'relative' }}>
-          <User size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+          <User size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
           <input
-            style={{ ...input, paddingLeft: 34 }}
+            style={{ ...inputStyle, paddingLeft: 34 }}
             placeholder="Your Name"
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -71,9 +71,9 @@ function ContactForm() {
           />
         </div>
         <div style={{ position: 'relative' }}>
-          <Mail size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+          <Mail size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
           <input
-            style={{ ...input, paddingLeft: 34 }}
+            style={{ ...inputStyle, paddingLeft: 34 }}
             type="email"
             placeholder="Your Email"
             value={form.email}
@@ -84,9 +84,9 @@ function ContactForm() {
       </div>
 
       <div style={{ position: 'relative' }}>
-        <MessageSquare size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: 12, pointerEvents: 'none' }} />
+        <MessageSquare size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12, pointerEvents: 'none' }} />
         <textarea
-          style={{ ...input, paddingLeft: 34, resize: 'none', height: 110, lineHeight: 1.6 }}
+          style={{ ...inputStyle, paddingLeft: 34, resize: 'none', height: 110, lineHeight: 1.6 }}
           placeholder="Your message…"
           value={form.message}
           onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
@@ -107,12 +107,13 @@ function ContactForm() {
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           padding: '13px', borderRadius: 10, fontSize: 14, fontWeight: 700,
-          background: status === 'loading' ? 'rgba(99,102,241,0.4)' : '#6366f1',
-          border: '1px solid #6366f1', color: '#fff', cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-          opacity: status === 'loading' ? 0.7 : 1, transition: 'background 0.2s, transform 0.15s',
+          background: status === 'loading' ? 'var(--accent-bg)' : 'var(--accent)',
+          border: '1px solid var(--accent)', color: 'var(--bg)',
+          cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+          opacity: status === 'loading' ? 0.7 : 1, transition: 'opacity 0.2s',
         }}
-        onMouseEnter={e => { if (status !== 'loading') e.currentTarget.style.background = '#5558e3' }}
-        onMouseLeave={e => { if (status !== 'loading') e.currentTarget.style.background = '#6366f1' }}
+        onMouseEnter={e => { if (status !== 'loading') e.currentTarget.style.opacity = '0.85' }}
+        onMouseLeave={e => { if (status !== 'loading') e.currentTarget.style.opacity = '1' }}
       >
         <Send size={15} />
         {status === 'loading' ? 'Sending…' : 'Send Message'}
@@ -130,7 +131,7 @@ export default function Contact() {
   const [activeTab, setActiveTab] = useState(0)
 
   return (
-    <section id="contact" style={{ padding: '108px 0', background: 'rgba(17,17,21,0.6)' }}>
+    <section id="contact" style={{ padding: '108px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
 
         {/* Section header */}
@@ -141,13 +142,13 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           style={{ marginBottom: 72, textAlign: 'center' }}
         >
-          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: '#8b5cf6', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--cm-purple-accent)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
             Let's Connect
           </span>
-          <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: '#f4f4f5', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: 'var(--text)', letterSpacing: '-0.02em' }}>
             Get In <span className="text-gradient-warm">Touch</span>
           </h2>
-          <p style={{ marginTop: 14, color: '#52525b', maxWidth: 480, margin: '14px auto 0', fontSize: 14 }}>
+          <p style={{ marginTop: 14, color: 'var(--text-dim)', maxWidth: 480, margin: '14px auto 0', fontSize: 14 }}>
             Open to exciting opportunities, collaborations, and interesting projects. Let's build something great together.
           </p>
         </motion.div>
@@ -161,36 +162,36 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 style={{ fontSize: 18, fontWeight: 700, color: '#f4f4f5', marginBottom: 30, letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 30, letterSpacing: '-0.02em' }}>
               Contact Information
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
               {[
-                { icon: Mail,   label: 'Email',    value: personal.email,    href: `mailto:${personal.email}`,  color: '#6366f1' },
-                { icon: Phone,  label: 'Phone',    value: personal.phone,    href: `tel:${personal.phone}`,     color: '#8b5cf6' },
-                { icon: MapPin, label: 'Location', value: personal.location,                                    color: '#10b981' },
+                { icon: Mail,   label: 'Email',    value: personal.email,    href: `mailto:${personal.email}`,  color: 'var(--cm-cyan-accent)' },
+                { icon: Phone,  label: 'Phone',    value: personal.phone,    href: `tel:${personal.phone}`,     color: 'var(--cm-purple-accent)' },
+                { icon: MapPin, label: 'Location', value: personal.location,                                    color: 'var(--cm-green-accent)' },
               ].map(({ icon: Icon, label, value, href, color }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                   <div style={{
                     width: 48, height: 48, borderRadius: 12, flexShrink: 0,
-                    background: `${color}14`, border: `1px solid ${color}28`,
+                    background: 'var(--surface)', border: '1px solid var(--border)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                     <Icon size={18} color={color} />
                   </div>
                   <div>
-                    <div style={{ fontSize: 11, color: '#52525b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 3, fontFamily: 'JetBrains Mono, monospace' }}>
+                    <div style={{ fontSize: 11, color: 'var(--text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 3, fontFamily: 'JetBrains Mono, monospace' }}>
                       {label}
                     </div>
                     {href ? (
-                      <a href={href} style={{ fontSize: 14, color: '#a1a1aa', textDecoration: 'none', transition: 'color 0.2s' }}
-                        onMouseEnter={e => e.target.style.color = color}
-                        onMouseLeave={e => e.target.style.color = '#a1a1aa'}>
+                      <a href={href} style={{ fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.2s' }}
+                        onMouseEnter={e => e.target.style.color = 'var(--accent)'}
+                        onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>
                         {value}
                       </a>
                     ) : (
-                      <span style={{ fontSize: 14, color: '#a1a1aa' }}>{value}</span>
+                      <span style={{ fontSize: 14, color: 'var(--text-muted)' }}>{value}</span>
                     )}
                   </div>
                 </div>
@@ -199,19 +200,19 @@ export default function Contact() {
 
             {/* Social icons */}
             <div style={{ marginTop: 40 }}>
-              <div style={{ fontSize: 11, color: '#52525b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14, fontFamily: 'JetBrains Mono, monospace' }}>
+              <div style={{ fontSize: 11, color: 'var(--text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14, fontFamily: 'JetBrains Mono, monospace' }}>
                 Find Me Online
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 {[
-                  { icon: Github,   href: personal.github,            label: 'GitHub',   hoverColor: '#f4f4f5' },
-                  { icon: Linkedin, href: personal.linkedin,           label: 'LinkedIn', hoverColor: '#0077b5' },
-                  { icon: Mail,     href: `mailto:${personal.email}`, label: 'Email',    hoverColor: '#6366f1' },
-                ].map(({ icon: Icon, href, label, hoverColor }) => (
+                  { icon: Github,   href: personal.github,            label: 'GitHub'   },
+                  { icon: Linkedin, href: personal.linkedin,           label: 'LinkedIn' },
+                  { icon: Mail,     href: `mailto:${personal.email}`, label: 'Email'    },
+                ].map(({ icon: Icon, href, label }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer" title={label}
-                    style={{ width: 44, height: 44, borderRadius: 10, background: '#18181c', border: '1px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#52525b', textDecoration: 'none', transition: 'all 0.2s ease' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = hoverColor; e.currentTarget.style.borderColor = `${hoverColor}35`; e.currentTarget.style.background = `${hoverColor}10` }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#52525b'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.background = '#18181c' }}
+                    style={{ width: 44, height: 44, borderRadius: 10, background: 'var(--surface)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', textDecoration: 'none', transition: 'all 0.2s ease' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent-border)' }}
+                    onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-dim)'; e.currentTarget.style.borderColor = 'var(--border)' }}
                   >
                     <Icon size={18} />
                   </a>
@@ -235,10 +236,10 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div style={{ background: '#111115', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 32 }}>
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 32 }}>
 
               {/* Tab switcher */}
-              <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: '#0d0d10', borderRadius: 10, padding: 4 }}>
+              <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: 'var(--surface2)', borderRadius: 10, padding: 4 }}>
                 {TABS.map(({ label, icon: Icon }, i) => (
                   <button
                     key={label}
@@ -247,19 +248,18 @@ export default function Contact() {
                     style={{
                       flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                       padding: '9px 10px', borderRadius: 7, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
-                      background: activeTab === i ? '#1c1c22' : 'transparent',
-                      color: activeTab === i ? '#f4f4f5' : '#52525b',
-                      boxShadow: activeTab === i ? '0 1px 3px rgba(0,0,0,0.4)' : 'none',
+                      background: activeTab === i ? 'var(--surface)' : 'transparent',
+                      color: activeTab === i ? 'var(--text)' : 'var(--text-dim)',
+                      boxShadow: activeTab === i ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
                       transition: 'all 0.2s',
                     }}
                   >
-                    <Icon size={13} color={activeTab === i ? (i === 0 ? '#6366f1' : '#8b5cf6') : '#52525b'} />
+                    <Icon size={13} color={activeTab === i ? (i === 0 ? 'var(--cm-cyan-accent)' : 'var(--cm-purple-accent)') : 'var(--text-dim)'} />
                     {label}
                   </button>
                 ))}
               </div>
 
-              {/* Tab content */}
               {activeTab === 0 ? <ContactForm /> : <ScheduleCall />}
 
             </div>
@@ -272,12 +272,12 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          style={{ marginTop: 80, textAlign: 'center', paddingTop: 36, borderTop: '1px solid rgba(255,255,255,0.06)' }}
+          style={{ marginTop: 80, textAlign: 'center', paddingTop: 36, borderTop: '1px solid var(--border)' }}
         >
-          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: '#3f3f46' }}>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--text-faint)' }}>
             Designed &amp; Built by{' '}
             <span className="text-gradient" style={{ fontWeight: 700 }}>Muhammad Shaheer Gul</span>
-            {' '}· 2025
+            {' '}· 2026
           </span>
         </motion.div>
 

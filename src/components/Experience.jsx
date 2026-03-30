@@ -2,17 +2,16 @@ import { motion } from 'framer-motion'
 import { Briefcase, Calendar, MapPin } from 'lucide-react'
 import { experience } from '../data/portfolio'
 
-// Map old color keys to new design system
 const colorMap = {
-  cyan:   { accent: '#6366f1', bg: 'rgba(99,102,241,0.08)',  border: 'rgba(99,102,241,0.18)' },
-  purple: { accent: '#8b5cf6', bg: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.18)' },
-  green:  { accent: '#10b981', bg: 'rgba(16,185,129,0.08)', border: 'rgba(16,185,129,0.18)' },
-  pink:   { accent: '#f59e0b', bg: 'rgba(245,158,11,0.08)',  border: 'rgba(245,158,11,0.18)'  },
+  cyan:   { accent: 'var(--cm-cyan-accent)',   bg: 'var(--cm-cyan-bg)',   border: 'var(--cm-cyan-border)'   },
+  purple: { accent: 'var(--cm-purple-accent)', bg: 'var(--cm-purple-bg)', border: 'var(--cm-purple-border)' },
+  green:  { accent: 'var(--cm-green-accent)',  bg: 'var(--cm-green-bg)',  border: 'var(--cm-green-border)'  },
+  pink:   { accent: 'var(--cm-pink-accent)',   bg: 'var(--cm-pink-bg)',   border: 'var(--cm-pink-border)'   },
 }
 
 export default function Experience() {
   return (
-    <section id="experience" style={{ padding: '108px 0' }}>
+    <section id="experience" style={{ padding: '108px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
 
         <motion.div
@@ -22,20 +21,20 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           style={{ marginBottom: 72, textAlign: 'center' }}
         >
-          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: '#6366f1', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--accent)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
             Career Path
           </span>
-          <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: '#f4f4f5', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: 'var(--text)', letterSpacing: '-0.02em' }}>
             Work <span className="text-gradient">Experience</span>
           </h2>
         </motion.div>
 
         <div style={{ position: 'relative', maxWidth: 800, margin: '0 auto' }}>
-          {/* Vertical timeline line */}
+          {/* Timeline line */}
           <div style={{
             position: 'absolute', left: 22, top: 8, bottom: 8, width: 1,
-            background: 'linear-gradient(to bottom, #6366f1, #8b5cf6)',
-            opacity: 0.25,
+            background: 'linear-gradient(to bottom, var(--accent), var(--gradient-to))',
+            opacity: 0.3,
           }} />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
@@ -63,17 +62,17 @@ export default function Experience() {
                   {/* Card */}
                   <div
                     style={{
-                      background: '#111115',
-                      border: `1px solid rgba(255,255,255,0.07)`,
+                      background: 'var(--surface)',
+                      border: '1px solid var(--border)',
                       borderRadius: 14, padding: 28,
                       transition: 'border-color 0.25s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.borderColor = c.border}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
                   >
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 14 }}>
                       <div>
-                        <h3 style={{ fontSize: 19, fontWeight: 700, color: '#f4f4f5', marginBottom: 5, letterSpacing: '-0.02em' }}>
+                        <h3 style={{ fontSize: 19, fontWeight: 700, color: 'var(--text)', marginBottom: 5, letterSpacing: '-0.02em' }}>
                           {job.role}
                         </h3>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
@@ -89,11 +88,11 @@ export default function Experience() {
                         }}>
                           {job.type}
                         </span>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#52525b' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, color: 'var(--text-dim)' }}>
                           <Calendar size={11} />
                           <span style={{ fontFamily: 'JetBrains Mono, monospace' }}>{job.period}</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#52525b' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, color: 'var(--text-dim)' }}>
                           <MapPin size={11} />
                           <span>{job.location}</span>
                         </div>
@@ -102,7 +101,7 @@ export default function Experience() {
 
                     <ul style={{ display: 'flex', flexDirection: 'column', gap: 9, paddingLeft: 0, listStyle: 'none', marginTop: 14 }}>
                       {job.highlights.map((h, hi) => (
-                        <li key={hi} style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 13, color: '#a1a1aa', lineHeight: 1.65 }}>
+                        <li key={hi} style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.65 }}>
                           <span style={{ color: c.accent, flexShrink: 0, marginTop: 2, fontSize: 12 }}>▸</span>
                           {h}
                         </li>

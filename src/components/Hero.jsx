@@ -36,14 +36,14 @@ export default function Hero({ onChatOpen }) {
   const typed = useTypewriter(personal.taglines)
 
   return (
-    <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+    <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: 'var(--bg)' }}>
       <GridBg />
 
-      {/* Subtle indigo radial glow — top-center */}
+      {/* Radial glow */}
       <div style={{
         position: 'absolute', top: '-10%', left: '50%', transform: 'translateX(-50%)',
         width: 700, height: 500, borderRadius: '50%',
-        background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse at center, var(--accent-bg) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
 
@@ -55,13 +55,13 @@ export default function Hero({ onChatOpen }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 14px', borderRadius: 100, border: '1px solid rgba(99,102,241,0.25)', background: 'rgba(99,102,241,0.08)', marginBottom: 28 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 14px', borderRadius: 100, border: '1px solid var(--accent-border)', background: 'var(--accent-bg)', marginBottom: 28 }}
           >
             <span style={{
               width: 7, height: 7, borderRadius: '50%', background: '#10b981', display: 'inline-block',
               animation: 'heroPulse 2s ease-in-out infinite',
             }} />
-            <span style={{ fontSize: 12, color: '#a5b4fc', fontWeight: 500, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.02em' }}>
+            <span style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 500, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.02em' }}>
               Available for new opportunities
             </span>
           </motion.div>
@@ -73,7 +73,7 @@ export default function Hero({ onChatOpen }) {
             transition={{ duration: 0.65, delay: 0.25 }}
             style={{ fontSize: 'clamp(44px, 7vw, 84px)', fontWeight: 900, lineHeight: 1.05, marginBottom: 18, letterSpacing: '-0.03em' }}
           >
-            <span style={{ color: '#f4f4f5' }}>Muhammad</span>
+            <span style={{ color: 'var(--text)' }}>Muhammad</span>
             <br />
             <span className="text-gradient">Shaheer Gul</span>
           </motion.h1>
@@ -83,7 +83,7 @@ export default function Hero({ onChatOpen }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.35 }}
-            style={{ fontSize: 'clamp(16px, 2.2vw, 22px)', fontWeight: 500, color: '#a1a1aa', marginBottom: 14, letterSpacing: '-0.01em' }}
+            style={{ fontSize: 'clamp(16px, 2.2vw, 22px)', fontWeight: 500, color: 'var(--text-muted)', marginBottom: 14, letterSpacing: '-0.01em' }}
           >
             Full Stack Developer &amp; Mobile App Architect
           </motion.p>
@@ -95,9 +95,9 @@ export default function Hero({ onChatOpen }) {
             transition={{ delay: 0.5 }}
             style={{ marginBottom: 44, height: 32, display: 'flex', alignItems: 'center' }}
           >
-            <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 'clamp(13px, 1.6vw, 16px)', color: '#818cf8' }}>
+            <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 'clamp(13px, 1.6vw, 16px)', color: 'var(--accent)' }}>
               {'▸ '}{typed}
-              <span style={{ borderRight: '2px solid #818cf8', marginLeft: 2, animation: 'blink 1.1s step-end infinite' }}>&nbsp;</span>
+              <span style={{ borderRight: '2px solid var(--accent)', marginLeft: 2, animation: 'blink 1.1s step-end infinite' }}>&nbsp;</span>
             </span>
           </motion.div>
 
@@ -109,7 +109,7 @@ export default function Hero({ onChatOpen }) {
             className="hero-stats"
             style={{
               display: 'inline-flex', flexWrap: 'wrap', gap: 0, marginBottom: 48,
-              background: '#111115', border: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--surface)', border: '1px solid var(--border)',
               borderRadius: 12, overflow: 'hidden',
             }}
           >
@@ -119,13 +119,13 @@ export default function Hero({ onChatOpen }) {
                 className="hero-stat-item"
                 style={{
                   padding: '18px 24px', display: 'flex', flexDirection: 'column', gap: 4,
-                  borderRight: i < personal.stats.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                  borderRight: i < personal.stats.length - 1 ? '1px solid var(--border)' : 'none',
                 }}
               >
                 <span style={{ fontSize: 26, fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1 }} className="text-gradient">
                   {stat.value}
                 </span>
-                <span style={{ fontSize: 12, color: '#52525b', fontWeight: 500, letterSpacing: '0.02em' }}>{stat.label}</span>
+                <span style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 500, letterSpacing: '0.02em' }}>{stat.label}</span>
               </div>
             ))}
           </motion.div>
@@ -137,52 +137,49 @@ export default function Hero({ onChatOpen }) {
             transition={{ duration: 0.55, delay: 0.68 }}
             style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}
           >
-            {/* View My Work */}
             <button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
                 padding: '13px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
-                background: '#6366f1', border: '1px solid #6366f1', color: '#fff',
+                background: 'var(--accent)', border: '1px solid var(--accent)', color: 'var(--bg)',
                 display: 'flex', alignItems: 'center', gap: 8,
-                transition: 'background 0.2s, transform 0.2s',
+                transition: 'opacity 0.2s, transform 0.2s',
                 letterSpacing: '-0.01em',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#5558e3'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#6366f1'; e.currentTarget.style.transform = 'translateY(0)' }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
               View My Work
               <ArrowRight size={16} />
             </button>
 
-            {/* Chat with AI */}
             <button
               onClick={onChatOpen}
               style={{
                 padding: '13px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
-                background: '#18181c', border: '1px solid rgba(255,255,255,0.1)', color: '#a1a1aa',
+                background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-muted)',
                 display: 'flex', alignItems: 'center', gap: 8,
                 transition: 'border-color 0.2s, color 0.2s, transform 0.2s',
                 letterSpacing: '-0.01em',
               }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(99,102,241,0.4)'; e.currentTarget.style.color = '#c7d2fe'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.transform = 'translateY(0)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-border)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
               <Sparkles size={16} />
               Chat with AI
             </button>
 
-            {/* Get in Touch */}
             <a
               href={`mailto:${personal.email}`}
               style={{
                 padding: '13px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700,
-                background: 'transparent', border: '1px solid rgba(255,255,255,0.07)', color: '#71717a',
+                background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-dim)',
                 display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none',
                 transition: 'border-color 0.2s, color 0.2s, transform 0.2s',
                 letterSpacing: '-0.01em',
               }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.color = '#71717a'; e.currentTarget.style.transform = 'translateY(0)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-dim)'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
               <Mail size={16} />
               Get in Touch
@@ -209,13 +206,13 @@ export default function Hero({ onChatOpen }) {
                 title={label}
                 style={{
                   width: 36, height: 36, borderRadius: 8,
-                  background: '#18181c', border: '1px solid rgba(255,255,255,0.07)',
+                  background: 'var(--surface)', border: '1px solid var(--border)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#52525b', textDecoration: 'none',
-                  transition: 'color 0.2s, border-color 0.2s, background 0.2s',
+                  color: 'var(--text-dim)', textDecoration: 'none',
+                  transition: 'color 0.2s, border-color 0.2s',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.background = '#1f1f24' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#52525b'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.background = '#18181c' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent-border)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-dim)'; e.currentTarget.style.borderColor = 'var(--border)' }}
               >
                 <Icon size={16} />
               </a>
@@ -233,11 +230,11 @@ export default function Hero({ onChatOpen }) {
         style={{ position: 'absolute', bottom: 36, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, cursor: 'pointer', zIndex: 1 }}
         onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
       >
-        <span style={{ fontSize: 10, color: '#3f3f46', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>scroll</span>
+        <span style={{ fontSize: 10, color: 'var(--text-faint)', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>scroll</span>
         <motion.div
           animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
           transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
-          style={{ width: 1, height: 28, background: 'linear-gradient(to bottom, #6366f1, transparent)', transformOrigin: 'top' }}
+          style={{ width: 1, height: 28, background: 'linear-gradient(to bottom, var(--accent), transparent)', transformOrigin: 'top' }}
         />
       </motion.div>
 

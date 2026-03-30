@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 
 const links = [
   { label: 'About',      href: '#about'      },
@@ -10,10 +10,11 @@ const links = [
   { label: 'Contact',    href: '#contact'    },
 ]
 
-export default function Navbar() {
+export default function Navbar({ theme, onToggleTheme }) {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive]     = useState('')
   const [open, setOpen]         = useState(false)
+  const dark = theme === 'dark'
 
   useEffect(() => {
     const onScroll = () => {
@@ -40,8 +41,8 @@ export default function Navbar() {
       transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, height: 64,
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-        background: scrolled ? 'rgba(9,9,11,0.85)' : 'transparent',
+        borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+        background: scrolled ? 'var(--nav-bg)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
         transition: 'all 0.3s ease',
       }}
@@ -51,14 +52,14 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
           style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg, var(--accent), var(--gradient-to))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 12L8 3.5L13 12" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M5.2 9H10.8" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/>
+              <path d="M3 12L8 3.5L13 12" stroke={dark ? '#020C1B' : '#fff'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M5.2 9H10.8" stroke={dark ? '#020C1B' : '#fff'} strokeWidth="1.8" strokeLinecap="round"/>
             </svg>
           </div>
-          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 14, fontWeight: 700, color: '#f4f4f5', letterSpacing: '-0.02em' }}>
-            shaheer<span style={{ color: '#6366f1' }}>.dev</span>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 14, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
+            shaheer<span style={{ color: 'var(--accent)' }}>.dev</span>
           </span>
         </a>
 
@@ -68,27 +69,45 @@ export default function Navbar() {
             const isActive = active === l.href.slice(1)
             return (
               <button key={l.href} onClick={() => goto(l.href)} style={{
-                background: isActive ? 'rgba(99,102,241,0.1)' : 'none',
+                background: isActive ? 'var(--accent-bg)' : 'none',
                 border: 'none', cursor: 'pointer',
                 padding: '6px 14px', borderRadius: 8, fontSize: 13.5, fontWeight: isActive ? 600 : 500,
-                color: isActive ? '#818cf8' : '#a1a1aa',
+                color: isActive ? 'var(--accent)' : 'var(--text-muted)',
                 transition: 'all 0.15s ease', letterSpacing: '-0.01em',
               }}
-                onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = '#e4e4e7'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}}
-                onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.background = 'none' }}}
+                onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.background = 'var(--border)' }}}
+                onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'none' }}}
               >{l.label}</button>
             )
           })}
+
+          {/* Theme toggle */}
+          <button
+            onClick={onToggleTheme}
+            title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+            style={{
+              marginLeft: 8, width: 36, height: 36, borderRadius: 8, border: '1px solid var(--border)',
+              background: 'var(--surface)', color: 'var(--text-muted)', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-border)'; e.currentTarget.style.color = 'var(--accent)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)' }}
+          >
+            {dark ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
+
           <a href="mailto:devshaheer360@gmail.com" style={{
-            marginLeft: 12, padding: '7px 18px', borderRadius: 8, fontSize: 13.5, fontWeight: 600,
-            background: '#6366f1', color: '#fff', textDecoration: 'none', transition: 'background 0.15s ease', letterSpacing: '-0.01em',
+            marginLeft: 8, padding: '7px 18px', borderRadius: 8, fontSize: 13.5, fontWeight: 600,
+            background: 'var(--accent)', color: dark ? '#020C1B' : '#fff', textDecoration: 'none',
+            transition: 'opacity 0.15s ease', letterSpacing: '-0.01em',
           }}
-            onMouseEnter={e => e.currentTarget.style.background = '#4f46e5'}
-            onMouseLeave={e => e.currentTarget.style.background = '#6366f1'}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
           >Hire Me</a>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile hamburger only */}
         <button onClick={() => setOpen(!open)} className="nav-hamburger">
           {open ? <X size={20}/> : <Menu size={20}/>}
         </button>
@@ -97,16 +116,24 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
-            style={{ background: 'rgba(9,9,11,0.98)', borderBottom: '1px solid rgba(255,255,255,0.07)', overflow: 'hidden' }}>
+            style={{ background: 'var(--nav-bg)', borderBottom: '1px solid var(--border)', overflow: 'hidden', backdropFilter: 'blur(20px)' }}>
             <div style={{ padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2 }}>
               {links.map(l => (
                 <button key={l.href} onClick={() => goto(l.href)} style={{
                   background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
                   textAlign: 'left', fontSize: 15, fontWeight: 500,
-                  color: active === l.href.slice(1) ? '#818cf8' : '#a1a1aa',
-                  borderBottom: '1px solid rgba(255,255,255,0.05)',
+                  color: active === l.href.slice(1) ? 'var(--accent)' : 'var(--text-muted)',
+                  borderBottom: '1px solid var(--border)',
                 }}>{l.label}</button>
               ))}
+              <button onClick={() => { onToggleTheme(); setOpen(false) }} style={{
+                background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
+                textAlign: 'left', fontSize: 15, fontWeight: 500, color: 'var(--text-muted)',
+                display: 'flex', alignItems: 'center', gap: 8,
+              }}>
+                {dark ? <Sun size={16} /> : <Moon size={16} />}
+                {dark ? 'Light Mode' : 'Dark Mode'}
+              </button>
             </div>
           </motion.div>
         )}

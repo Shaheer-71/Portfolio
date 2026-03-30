@@ -9,7 +9,7 @@ export const personal = {
   ],
   email: 'devshaheer360@gmail.com',
   phone: '+966-536250307',
-  location: 'Al Jubayl, Saudi Arabia',
+  location: 'Riyadh, Saudi Arabia',
   github: 'https://github.com/',
   linkedin: 'https://linkedin.com/in/',
   summary: `Full Stack Developer and Mobile App Architect specializing in React and React Native with 5+ years of experience building scalable web and mobile applications. Proven experience developing multi-tenant platforms, real-time chat systems, dashboards, geolocation features, and AI-powered applications. Delivered production solutions serving 50K+ users and multiple organizations, focusing on clean UI/UX, reusable components, cross-platform development, and maintainable code.`,
@@ -161,6 +161,9 @@ export const projects = [
     ],
     tech: ['React Native', 'React.js', 'TypeScript', 'Redux Toolkit', 'RTK Query', 'Python/Django', 'OpenAI GPT-4', 'Pinecone', 'PostgreSQL', 'Stripe', 'Socket.io', 'Firebase', 'Sentry'],
     stats: { users: '50K+', orgs: '200+' },
+    links: [
+      { label: 'Live Site', url: 'https://www.aiattorney.com.pk/', type: 'live' },
+    ],
     color: 'cyan',
     icon: '⚖️',
   },
@@ -178,11 +181,15 @@ export const projects = [
     ],
     tech: ['React Native', 'React.js', 'TypeScript', 'Redux Toolkit', 'Firebase', 'Socket.io', 'Tailwind CSS', 'Google Maps API', 'JWT', 'Sentry'],
     stats: { users: '5K+', downloads: 'Play Store' },
+    links: [
+      { label: 'Web App', url: 'https://humraah.firefly-techsolutions.com/', type: 'live' },
+      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.familyplaining&hl=en', type: 'store' },
+    ],
     color: 'green',
     icon: '🏥',
   },
   {
-    name: 'SPO (Campus Pro)',
+    name: 'SPO Campus Pro',
     subtitle: 'Multi-Tenant School ERP',
     period: 'Dec 2020 – Jul 2021',
     description:
@@ -195,11 +202,14 @@ export const projects = [
     ],
     tech: ['React.js', 'React Native', 'TypeScript', 'Redux Toolkit', 'RTK Query', 'Node.js', 'PostgreSQL', 'Socket.io', 'FCM', 'NodeMailer'],
     stats: { schools: '20+', students: '15K+' },
+    links: [
+      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.SPO.SchoolMontitoringApp', type: 'store' },
+    ],
     color: 'purple',
     icon: '🏫',
   },
   {
-    name: 'Cayuse (Danalyx)',
+    name: 'Cayuse',
     subtitle: 'Research Management Platform',
     period: 'Sep 2023 – Oct 2024',
     description:
@@ -212,6 +222,9 @@ export const projects = [
     ],
     tech: ['PostgreSQL', 'AWS S3', 'AWS EC2', 'Power BI', 'Duplo Cloud', 'Bitbucket Pipelines', 'Confluence'],
     stats: { records: 'Millions', clients: 'Enterprise' },
+    links: [
+      { label: 'Live Site', url: 'https://www.cayuse.com/', type: 'live' },
+    ],
     color: 'pink',
     icon: '🔬',
   },
@@ -229,8 +242,30 @@ export const projects = [
     ],
     tech: ['React Native', 'TypeScript', 'Redux Toolkit', 'Notifee', 'react-native-geolocation-service', 'NativeWind', 'Reanimated', 'Jira'],
     stats: { industry: 'Saudi Arabia', type: 'Field Services' },
+    links: [
+      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.xcelerate', type: 'store' },
+    ],
     color: 'cyan',
     icon: '🔧',
+  },
+  {
+    name: 'Metro Pakistan',
+    subtitle: 'E-Commerce & Retail Platform',
+    period: '2024',
+    description:
+      "Metro Pakistan's digital retail platform — one of Pakistan's largest cash & carry wholesale chains. Contributed to the web platform enabling customers to browse products, manage orders, and access wholesale pricing online.",
+    highlights: [
+      "Large-scale retail e-commerce platform for Pakistan's top wholesale chain",
+      'Product catalogue, order management, and wholesale pricing features',
+      'High-traffic production environment with enterprise-scale data',
+    ],
+    tech: ['React.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'REST APIs'],
+    stats: { scale: 'Enterprise', market: 'Pakistan' },
+    links: [
+      { label: 'Live Site', url: 'https://www.metro.pk/', type: 'live' },
+    ],
+    color: 'green',
+    icon: '🛒',
   },
 ]
 
@@ -280,7 +315,7 @@ export const chatbotSystemPrompt = `You are Shaheer's AI portfolio assistant. Yo
 - **Full Name**: Muhammad Shaheer Gul
 - **Title**: Full Stack Developer & Mobile App Architect
 - **Experience**: 5+ years
-- **Location**: Al Jubayl, Saudi Arabia (Transferable Iqama)
+- **Location**: Riyadh, Saudi Arabia (Transferable Iqama)
 - **Email**: devshaheer360@gmail.com
 - **Phone**: +966-536250307
 - **Languages**: Urdu (C2), English (C2)

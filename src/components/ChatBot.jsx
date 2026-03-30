@@ -13,12 +13,11 @@ const SUGGESTIONS = [
   'Can you schedule a meeting?',
 ]
 
-// Render **bold**, bullet lines, numbered lists, headers
 function renderInline(text) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
   return parts.map((part, i) =>
     part.startsWith('**') && part.endsWith('**')
-      ? <strong key={i} style={{ color: '#e4e4e7', fontWeight: 600 }}>{part.slice(2, -2)}</strong>
+      ? <strong key={i} style={{ color: 'var(--text)', fontWeight: 600 }}>{part.slice(2, -2)}</strong>
       : part
   )
 }
@@ -29,27 +28,24 @@ function renderMarkdown(text) {
     const t = line.trim()
     if (!t) return <div key={i} style={{ height: 3 }} />
 
-    // Bullet: -, *, •
     const bulletMatch = t.match(/^[-*•]\s+(.+)/)
     if (bulletMatch) return (
       <div key={i} style={{ display: 'flex', gap: 7, paddingLeft: 2, marginTop: 1 }}>
-        <span style={{ color: '#6366f1', flexShrink: 0, marginTop: 1 }}>▸</span>
+        <span style={{ color: 'var(--accent)', flexShrink: 0, marginTop: 1 }}>▸</span>
         <span>{renderInline(bulletMatch[1])}</span>
       </div>
     )
 
-    // Numbered list: 1. 2. 3.
     const numMatch = t.match(/^(\d+)\.\s+(.+)/)
     if (numMatch) return (
       <div key={i} style={{ display: 'flex', gap: 7, paddingLeft: 2, marginTop: 1 }}>
-        <span style={{ color: '#6366f1', flexShrink: 0, minWidth: 14 }}>{numMatch[1]}.</span>
+        <span style={{ color: 'var(--accent)', flexShrink: 0, minWidth: 14 }}>{numMatch[1]}.</span>
         <span>{renderInline(numMatch[2])}</span>
       </div>
     )
 
-    // Header ## or ###
-    if (t.startsWith('### ')) return <div key={i} style={{ fontWeight: 700, color: '#f4f4f5', marginTop: 6 }}>{renderInline(t.slice(4))}</div>
-    if (t.startsWith('## '))  return <div key={i} style={{ fontWeight: 700, color: '#f4f4f5', marginTop: 6 }}>{renderInline(t.slice(3))}</div>
+    if (t.startsWith('### ')) return <div key={i} style={{ fontWeight: 700, color: 'var(--text)', marginTop: 6 }}>{renderInline(t.slice(4))}</div>
+    if (t.startsWith('## '))  return <div key={i} style={{ fontWeight: 700, color: 'var(--text)', marginTop: 6 }}>{renderInline(t.slice(3))}</div>
 
     return <div key={i}>{renderInline(t)}</div>
   })
@@ -70,18 +66,18 @@ function Message({ msg }) {
       {isBot && (
         <div style={{
           width: 28, height: 28, borderRadius: '50%', flexShrink: 0, marginTop: 2,
-          background: '#6366f1',
+          background: 'var(--accent)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <Bot size={13} color="#fff" />
+          <Bot size={13} color="var(--bg)" />
         </div>
       )}
       <div style={{
         maxWidth: '80%', padding: '10px 14px',
         borderRadius: isBot ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
-        background: isBot ? '#18181c' : 'rgba(99,102,241,0.15)',
-        border: isBot ? '1px solid rgba(255,255,255,0.07)' : '1px solid rgba(99,102,241,0.3)',
-        fontSize: 13, lineHeight: 1.7, color: '#a1a1aa',
+        background: isBot ? 'var(--surface2)' : 'var(--accent-bg)',
+        border: isBot ? '1px solid var(--border)' : '1px solid var(--accent-border)',
+        fontSize: 13, lineHeight: 1.7, color: 'var(--text-muted)',
         display: 'flex', flexDirection: 'column', gap: 1,
       }}>
         {isBot ? renderMarkdown(msg.content) : msg.content}
@@ -89,10 +85,10 @@ function Message({ msg }) {
       {!isBot && (
         <div style={{
           width: 28, height: 28, borderRadius: '50%', flexShrink: 0, marginTop: 2,
-          background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)',
+          background: 'var(--accent-bg)', border: '1px solid var(--accent-border)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <User size={13} color="#818cf8" />
+          <User size={13} color="var(--accent)" />
         </div>
       )}
     </motion.div>
@@ -174,16 +170,15 @@ export default function ChatBot({ isOpen, onClose }) {
             style={{
               position: 'fixed', bottom: 32, right: 32, zIndex: 200,
               width: 56, height: 56, borderRadius: '50%', cursor: 'pointer',
-              background: '#6366f1', border: 'none', color: '#fff',
+              background: 'var(--accent)', border: 'none', color: 'var(--bg)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 20px rgba(99,102,241,0.35)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
             }}
           >
             <MessageSquare size={22} />
-            {/* Pulsing ring */}
             <span style={{
               position: 'absolute', inset: -5, borderRadius: '50%',
-              border: '2px solid rgba(99,102,241,0.35)',
+              border: '2px solid var(--accent-border)',
               animation: 'chatPulseRing 2s ease-out infinite',
             }} />
           </motion.button>
@@ -203,28 +198,29 @@ export default function ChatBot({ isOpen, onClose }) {
               width: 'min(400px, calc(100vw - 32px))',
               height: 'min(580px, calc(100vh - 48px))',
               borderRadius: 16,
-              background: '#0d0d10',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
               display: 'flex', flexDirection: 'column', overflow: 'hidden',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
             }}
           >
             {/* Header */}
             <div style={{
-              padding: '14px 18px', borderBottom: '1px solid rgba(255,255,255,0.06)',
-              background: 'rgba(255,255,255,0.02)',
+              padding: '14px 18px', borderBottom: '1px solid var(--border)',
+              background: 'var(--surface2)',
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               flexShrink: 0,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div style={{
                   width: 34, height: 34, borderRadius: '50%',
-                  background: '#6366f1',
+                  background: 'var(--accent)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <Bot size={17} color="#fff" />
+                  <Bot size={17} color="var(--bg)" />
                 </div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#f4f4f5', letterSpacing: '-0.01em' }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.01em' }}>
                     Shaheer's AI
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: '#10b981' }}>
@@ -237,11 +233,11 @@ export default function ChatBot({ isOpen, onClose }) {
                 onClick={onClose}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  color: '#52525b', padding: 6, borderRadius: 8, transition: 'color 0.2s',
+                  color: 'var(--text-dim)', padding: 6, borderRadius: 8, transition: 'color 0.2s',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}
-                onMouseEnter={e => e.currentTarget.style.color = '#a1a1aa'}
-                onMouseLeave={e => e.currentTarget.style.color = '#52525b'}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-dim)'}
               >
                 <X size={17} />
               </button>
@@ -262,14 +258,14 @@ export default function ChatBot({ isOpen, onClose }) {
                 >
                   <div style={{
                     width: 28, height: 28, borderRadius: '50%',
-                    background: '#6366f1',
+                    background: 'var(--accent)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                   }}>
-                    <Bot size={13} color="#fff" />
+                    <Bot size={13} color="var(--bg)" />
                   </div>
                   <div style={{
                     padding: '10px 14px', borderRadius: '4px 14px 14px 14px',
-                    background: '#18181c', border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--surface2)', border: '1px solid var(--border)',
                     display: 'flex', gap: 5, alignItems: 'center',
                   }}>
                     {[0, 1, 2].map(i => (
@@ -277,7 +273,7 @@ export default function ChatBot({ isOpen, onClose }) {
                         key={i}
                         animate={{ opacity: [0.3, 1, 0.3] }}
                         transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                        style={{ width: 5, height: 5, borderRadius: '50%', background: '#6366f1', display: 'inline-block' }}
+                        style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block' }}
                       />
                     ))}
                   </div>
@@ -286,7 +282,7 @@ export default function ChatBot({ isOpen, onClose }) {
               <div ref={bottomRef} />
             </div>
 
-            {/* Suggestions — shown only on first message */}
+            {/* Suggestions */}
             {messages.length <= 1 && (
               <div style={{ padding: '0 18px 10px', display: 'flex', flexWrap: 'wrap', gap: 7, flexShrink: 0 }}>
                 {SUGGESTIONS.map(s => (
@@ -295,11 +291,11 @@ export default function ChatBot({ isOpen, onClose }) {
                     onClick={() => send(s)}
                     style={{
                       padding: '5px 11px', borderRadius: 100, fontSize: 11, cursor: 'pointer',
-                      background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)',
-                      color: '#818cf8', fontWeight: 500, transition: 'background 0.2s',
+                      background: 'var(--accent-bg)', border: '1px solid var(--accent-border)',
+                      color: 'var(--accent)', fontWeight: 500, transition: 'opacity 0.2s',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(99,102,241,0.16)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(99,102,241,0.08)'}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
                   >
                     {s}
                   </button>
@@ -308,16 +304,16 @@ export default function ChatBot({ isOpen, onClose }) {
             )}
 
             {/* Input */}
-            <div style={{ padding: '10px 18px 18px', borderTop: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
+            <div style={{ padding: '10px 18px 18px', borderTop: '1px solid var(--border)', flexShrink: 0 }}>
               <div
                 style={{
                   display: 'flex', gap: 8, alignItems: 'flex-end',
-                  background: '#18181c', border: '1px solid rgba(255,255,255,0.08)',
+                  background: 'var(--surface2)', border: '1px solid var(--border)',
                   borderRadius: 12, padding: '9px 12px',
                   transition: 'border-color 0.2s',
                 }}
-                onFocus={e => e.currentTarget.style.borderColor = 'rgba(99,102,241,0.4)'}
-                onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'}
+                onFocus={e => e.currentTarget.style.borderColor = 'var(--accent-border)'}
+                onBlur={e => e.currentTarget.style.borderColor = 'var(--border)'}
               >
                 <textarea
                   ref={inputRef}
@@ -328,7 +324,7 @@ export default function ChatBot({ isOpen, onClose }) {
                   rows={1}
                   style={{
                     flex: 1, background: 'none', border: 'none', outline: 'none',
-                    color: '#f4f4f5', fontSize: 13, lineHeight: 1.5, resize: 'none',
+                    color: 'var(--text)', fontSize: 13, lineHeight: 1.5, resize: 'none',
                     fontFamily: 'Inter, sans-serif', maxHeight: 80, overflowY: 'auto',
                   }}
                   onInput={e => {
@@ -342,19 +338,19 @@ export default function ChatBot({ isOpen, onClose }) {
                   style={{
                     width: 32, height: 32, borderRadius: 8, border: 'none', flexShrink: 0,
                     cursor: input.trim() && !loading ? 'pointer' : 'not-allowed',
-                    background: input.trim() && !loading ? '#6366f1' : 'rgba(255,255,255,0.06)',
+                    background: input.trim() && !loading ? 'var(--accent)' : 'var(--surface)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'background 0.2s',
                   }}
                 >
                   {loading
-                    ? <Loader2 size={14} color="#52525b" style={{ animation: 'chatSpin 1s linear infinite' }} />
-                    : <Send size={14} color={input.trim() ? '#fff' : '#52525b'} />
+                    ? <Loader2 size={14} color="var(--text-dim)" style={{ animation: 'chatSpin 1s linear infinite' }} />
+                    : <Send size={14} color={input.trim() ? 'var(--bg)' : 'var(--text-dim)'} />
                   }
                 </button>
               </div>
-              <div style={{ textAlign: 'center', marginTop: 7, fontSize: 10, color: '#3f3f46', fontFamily: 'JetBrains Mono, monospace' }}>
-                Powered by Claude AI · Ask anything about Shaheer
+              <div style={{ textAlign: 'center', marginTop: 7, fontSize: 10, color: 'var(--text-faint)', fontFamily: 'JetBrains Mono, monospace' }}>
+                Ask anything about Shaheer
               </div>
             </div>
           </motion.div>

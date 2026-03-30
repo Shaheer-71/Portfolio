@@ -21,7 +21,7 @@ const SYSTEM_PROMPT = `You are Shaheer's AI portfolio assistant. You represent M
 - **Full Name**: Muhammad Shaheer Gul
 - **Title**: Full Stack Developer & Mobile App Architect
 - **Experience**: 5+ years
-- **Location**: Al Jubayl, Saudi Arabia (Transferable Iqama)
+- **Location**: Riyadh, Saudi Arabia (Transferable Iqama)
 - **Email**: devshaheer360@gmail.com
 - **Phone**: +966-536250307
 - **Languages**: Urdu (C2), English (C2)

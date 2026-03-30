@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { Calendar, Clock, User, Mail, MessageSquare, CheckCircle, ExternalLink, Video } from 'lucide-react'
+import { Calendar, Clock, User, Mail, MessageSquare, CheckCircle, ExternalLink } from 'lucide-react'
 
 const TIME_SLOTS = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00']
 
 function getAvailableDates(count = 10) {
   const dates = []
   const d = new Date()
-  d.setDate(d.getDate() + 1) // start from tomorrow
+  d.setDate(d.getDate() + 1)
   while (dates.length < count) {
     const day = d.getDay()
-    if (day !== 0 && day !== 6) dates.push(new Date(d)) // skip weekends
+    if (day !== 0 && day !== 6) dates.push(new Date(d))
     d.setDate(d.getDate() + 1)
   }
   return dates
@@ -23,17 +23,17 @@ function toISO(d) {
   return d.toISOString().split('T')[0]
 }
 
-const input = {
+const inputStyle = {
   width: '100%', padding: '11px 14px', borderRadius: 8, fontSize: 13,
-  background: '#0d0d10', border: '1px solid rgba(255,255,255,0.08)', color: '#f4f4f5',
-  outline: 'none', boxSizing: 'border-box',
+  background: 'var(--surface2)', border: '1px solid var(--border)', color: 'var(--text)',
+  outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s',
 }
 
 export default function ScheduleCall() {
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
   const [form, setForm] = useState({ name: '', email: '', purpose: '' })
-  const [status, setStatus]   = useState(null) // null | 'loading' | 'success' | 'error'
+  const [status, setStatus]   = useState(null)
   const [result, setResult]   = useState(null)
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -77,27 +77,18 @@ export default function ScheduleCall() {
         <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
           <CheckCircle size={24} color="#10b981" />
         </div>
-        <h4 style={{ color: '#f4f4f5', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Interview Scheduled!</h4>
-        <p style={{ color: '#71717a', fontSize: 13, lineHeight: 1.6, margin: '0 0 20px' }}>
+        <h4 style={{ color: 'var(--text)', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Interview Scheduled!</h4>
+        <p style={{ color: 'var(--text-muted)', fontSize: 13, lineHeight: 1.6, margin: '0 0 20px' }}>
           {fmtDate(selectedDate)} at {selectedTime} AST<br />
           Check your email for confirmation.
         </p>
-        {(result?.eventLink || result?.meetLink) && (
-          <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
-            {result.eventLink && (
-              <a href={result.eventLink} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '9px 16px', borderRadius: 8, background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.25)', color: '#8b5cf6', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
-                <ExternalLink size={13} /> Calendar Event
-              </a>
-            )}
-            {result.meetLink && (
-              <a href={result.meetLink} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '9px 16px', borderRadius: 8, background: 'rgba(0,212,255,0.1)', border: '1px solid rgba(0,212,255,0.2)', color: '#00d4ff', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
-                <Video size={13} /> Join Meet
-              </a>
-            )}
-          </div>
+        {result?.eventLink && (
+          <a href={result.eventLink} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '9px 16px', borderRadius: 8, background: 'var(--accent-bg)', border: '1px solid var(--accent-border)', color: 'var(--accent)', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
+            <ExternalLink size={13} /> Calendar Event
+          </a>
         )}
         <button onClick={() => { setStatus(null); setResult(null); setSelectedDate(null); setSelectedTime(null); setForm({ name: '', email: '', purpose: '' }) }}
-          style={{ marginTop: 16, background: 'none', border: 'none', color: '#52525b', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}>
+          style={{ marginTop: 16, display: 'block', margin: '16px auto 0', background: 'none', border: 'none', color: 'var(--text-dim)', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}>
           Schedule another
         </button>
       </div>
@@ -109,8 +100,8 @@ export default function ScheduleCall() {
 
       {/* Date picker */}
       <div>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#52525b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, fontFamily: 'JetBrains Mono, monospace' }}>
-          <Calendar size={12} color="#8b5cf6" /> Select Date
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, fontFamily: 'JetBrains Mono, monospace' }}>
+          <Calendar size={12} color="var(--cm-purple-accent)" /> Select Date
         </label>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {dates.map((d) => {
@@ -123,9 +114,9 @@ export default function ScheduleCall() {
                 onClick={() => { setSelectedDate(d); setSelectedTime(null) }}
                 style={{
                   padding: '7px 12px', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer',
-                  background: active ? 'rgba(139,92,246,0.15)' : '#0d0d10',
-                  border: `1px solid ${active ? '#8b5cf6' : 'rgba(255,255,255,0.07)'}`,
-                  color: active ? '#8b5cf6' : '#71717a',
+                  background: active ? 'var(--cm-purple-bg)' : 'var(--surface2)',
+                  border: `1px solid ${active ? 'var(--cm-purple-border)' : 'var(--border)'}`,
+                  color: active ? 'var(--cm-purple-accent)' : 'var(--text-muted)',
                   transition: 'all 0.15s',
                 }}
               >
@@ -139,8 +130,8 @@ export default function ScheduleCall() {
       {/* Time slots */}
       {selectedDate && (
         <div>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#52525b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, fontFamily: 'JetBrains Mono, monospace' }}>
-            <Clock size={12} color="#00d4ff" /> Select Time (AST)
+          <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, fontFamily: 'JetBrains Mono, monospace' }}>
+            <Clock size={12} color="var(--cm-cyan-accent)" /> Select Time (AST)
           </label>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
             {TIME_SLOTS.map((t) => (
@@ -150,9 +141,9 @@ export default function ScheduleCall() {
                 onClick={() => setSelectedTime(t)}
                 style={{
                   padding: '7px 16px', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer',
-                  background: selectedTime === t ? 'rgba(0,212,255,0.12)' : '#0d0d10',
-                  border: `1px solid ${selectedTime === t ? '#00d4ff' : 'rgba(255,255,255,0.07)'}`,
-                  color: selectedTime === t ? '#00d4ff' : '#71717a',
+                  background: selectedTime === t ? 'var(--cm-cyan-bg)' : 'var(--surface2)',
+                  border: `1px solid ${selectedTime === t ? 'var(--cm-cyan-border)' : 'var(--border)'}`,
+                  color: selectedTime === t ? 'var(--cm-cyan-accent)' : 'var(--text-muted)',
                   transition: 'all 0.15s',
                 }}
               >
@@ -163,14 +154,14 @@ export default function ScheduleCall() {
         </div>
       )}
 
-      {/* Details form — shown after date + time selected */}
+      {/* Details form */}
       {selectedDate && selectedTime && (
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ position: 'relative' }}>
-              <User size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+              <User size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
               <input
-                style={{ ...input, paddingLeft: 34 }}
+                style={{ ...inputStyle, paddingLeft: 34 }}
                 placeholder="Your Name"
                 value={form.name}
                 onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -178,9 +169,9 @@ export default function ScheduleCall() {
               />
             </div>
             <div style={{ position: 'relative' }}>
-              <Mail size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+              <Mail size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
               <input
-                style={{ ...input, paddingLeft: 34 }}
+                style={{ ...inputStyle, paddingLeft: 34 }}
                 type="email"
                 placeholder="Your Email"
                 value={form.email}
@@ -189,9 +180,9 @@ export default function ScheduleCall() {
               />
             </div>
             <div style={{ position: 'relative' }}>
-              <MessageSquare size={14} color="#52525b" style={{ position: 'absolute', left: 12, top: 12, pointerEvents: 'none' }} />
+              <MessageSquare size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12, pointerEvents: 'none' }} />
               <textarea
-                style={{ ...input, paddingLeft: 34, resize: 'none', height: 68 }}
+                style={{ ...inputStyle, paddingLeft: 34, resize: 'none', height: 68 }}
                 placeholder="Purpose / role you're hiring for (optional)"
                 value={form.purpose}
                 onChange={e => setForm(f => ({ ...f, purpose: e.target.value }))}
@@ -200,8 +191,8 @@ export default function ScheduleCall() {
             </div>
           </div>
 
-          {/* Summary + submit */}
-          <div style={{ background: 'rgba(139,92,246,0.06)', border: '1px solid rgba(139,92,246,0.15)', borderRadius: 8, padding: '12px 14px', fontSize: 13, color: '#a1a1aa' }}>
+          {/* Summary */}
+          <div style={{ background: 'var(--accent-bg)', border: '1px solid var(--accent-border)', borderRadius: 8, padding: '12px 14px', fontSize: 13, color: 'var(--text-muted)' }}>
             📅 {fmtDate(selectedDate)} &nbsp;·&nbsp; 🕐 {selectedTime} AST &nbsp;·&nbsp; ⏱ 1 hour
           </div>
 
@@ -215,13 +206,15 @@ export default function ScheduleCall() {
             type="submit"
             disabled={status === 'loading'}
             style={{
-              padding: '13px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-              background: status === 'loading' ? 'rgba(139,92,246,0.4)' : '#8b5cf6',
-              border: '1px solid #8b5cf6', color: '#fff', opacity: status === 'loading' ? 0.7 : 1,
-              transition: 'background 0.2s, transform 0.15s',
+              padding: '13px', borderRadius: 10, fontSize: 14, fontWeight: 700,
+              cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+              background: status === 'loading' ? 'var(--accent-bg)' : 'var(--accent)',
+              border: '1px solid var(--accent)', color: 'var(--bg)',
+              opacity: status === 'loading' ? 0.7 : 1,
+              transition: 'opacity 0.2s',
             }}
-            onMouseEnter={e => { if (status !== 'loading') e.currentTarget.style.background = '#7c3aed' }}
-            onMouseLeave={e => { if (status !== 'loading') e.currentTarget.style.background = '#8b5cf6' }}
+            onMouseEnter={e => { if (status !== 'loading') e.currentTarget.style.opacity = '0.85' }}
+            onMouseLeave={e => { if (status !== 'loading') e.currentTarget.style.opacity = '1' }}
           >
             {status === 'loading' ? 'Scheduling…' : 'Confirm Interview'}
           </button>
