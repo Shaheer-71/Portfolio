@@ -19,10 +19,11 @@ const initials = personal.name
 const ease = [0.22, 1, 0.36, 1]
 
 // Thick, hollow outlined chevron bracket — matches the reference
-function Chevron({ dir = 'left', size = 92, style }) {
+function Chevron({ dir = 'left', size = 92, style, className }) {
   const id = `chev-grad-${dir}`
   return (
     <svg
+      className={className}
       width={size} height={size * 1.18} viewBox="0 0 120 142" fill="none"
       style={{ transform: dir === 'right' ? 'scaleX(-1)' : 'none', filter: 'drop-shadow(0 0 8px var(--accent))', ...style }}
     >
@@ -121,39 +122,62 @@ export default function Hero({ onChatOpen }) {
             {t('hero.intro')}
           </motion.p>
 
-          {/* CTAs */}
+          {/* Hero action buttons */}
           <motion.div
-            className="hero-row-center"
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease, delay: 0.44 }}
-            style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}
+            className="hero-actions"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.44 }}
+            style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 24 }}
           >
             <button
-              onClick={() => scrollTo('contact')}
+              className="hero-action-button"
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
                 padding: '15px 30px', borderRadius: 6, fontSize: 15, fontWeight: 600, cursor: 'pointer',
                 background: 'var(--accent)', border: '1px solid var(--accent)', color: 'var(--bg)',
                 transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                 boxShadow: '0 8px 26px -10px var(--accent)',
+                display: 'inline-flex', alignItems: 'center', gap: 8,
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px -10px var(--accent)' }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 26px -10px var(--accent)' }}
             >
-              {t('hero.ctaProject')}
+              {t('hero.bottomWork')}
+              <ArrowRight size={16} />
             </button>
 
             <button
-              onClick={() => scrollTo('experience')}
+              className="hero-action-button"
+              onClick={onChatOpen}
               style={{
                 padding: '15px 30px', borderRadius: 6, fontSize: 15, fontWeight: 600, cursor: 'pointer',
                 background: 'transparent', border: '1px solid var(--border-hover)', color: 'var(--text)',
+                transition: 'border-color 0.2s ease, color 0.2s ease, transform 0.2s ease',
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.transform = 'translateY(0)' }}
+            >
+              <Sparkles size={16} />
+              {t('hero.bottomChat')}
+            </button>
+
+            <a
+              className="hero-action-button hero-action-touch"
+              href={`mailto:${personal.email}`}
+              style={{
+                padding: '15px 30px', borderRadius: 6, fontSize: 15, fontWeight: 600, cursor: 'pointer',
+                background: 'transparent', border: '1px solid var(--border-hover)', color: 'var(--text)',
+                display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none',
                 transition: 'border-color 0.2s ease, color 0.2s ease, transform 0.2s ease',
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
-              {t('hero.ctaResume')}
-            </button>
+              <Mail size={16} />
+              {t('hero.bottomTouch')}
+            </a>
           </motion.div>
 
           {/* Social icons */}
@@ -208,6 +232,7 @@ export default function Hero({ onChatOpen }) {
 
             {/* Ring — gradient stroke that fades toward the bottom */}
             <svg
+              className="hero-ring"
               viewBox="0 0 200 200" fill="none"
               style={{
                 position: 'absolute', top: '53%', left: '50%', transform: 'translate(-50%, -50%)',
@@ -226,8 +251,8 @@ export default function Hero({ onChatOpen }) {
             </svg>
 
             {/* Chevrons — thick hollow brackets, clear of the ring */}
-            <Chevron dir="left"  size={84} style={{ position: 'absolute', left: '-17%', top: '20%', zIndex: 3 }} />
-            <Chevron dir="right" size={84} style={{ position: 'absolute', right: '-17%', bottom: '12%', zIndex: 3 }} />
+            <Chevron className="hero-ring-chevron hero-ring-chevron-left" dir="left"  size={84} style={{ position: 'absolute', left: '-17%', top: '20%', zIndex: 3 }} />
+            <Chevron className="hero-ring-chevron hero-ring-chevron-right" dir="right" size={84} style={{ position: 'absolute', right: '-17%', bottom: '12%', zIndex: 3 }} />
 
             {/* Person cutout — overflows the ring */}
             {imgOk ? (
@@ -279,59 +304,6 @@ export default function Hero({ onChatOpen }) {
             </span>
           ))}
         </div>
-      </motion.div>
-
-      {/* Bottom hero actions */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.9 }}
-        style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', padding: '24px 40px 32px' }}
-      >
-        <button
-          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          style={{
-            padding: '14px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
-            background: 'var(--accent)', border: '1px solid var(--accent)', color: 'var(--bg)',
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            transition: 'opacity 0.2s, transform 0.2s', letterSpacing: '-0.01em',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
-        >
-          {t('hero.bottomWork')}
-          <ArrowRight size={16} />
-        </button>
-
-        <button
-          onClick={onChatOpen}
-          style={{
-            padding: '14px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
-            background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-muted)',
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            transition: 'border-color 0.2s, color 0.2s, transform 0.2s', letterSpacing: '-0.01em',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-border)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateY(0)' }}
-        >
-          <Sparkles size={16} />
-          {t('hero.bottomChat')}
-        </button>
-
-        <a
-          href={`mailto:${personal.email}`}
-          style={{
-            padding: '14px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
-            background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-dim)',
-            display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none',
-            transition: 'border-color 0.2s, color 0.2s, transform 0.2s', letterSpacing: '-0.01em',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-dim)'; e.currentTarget.style.transform = 'translateY(0)' }}
-        >
-          <Mail size={16} />
-          {t('hero.bottomTouch')}
-        </a>
       </motion.div>
     </section>
   )
