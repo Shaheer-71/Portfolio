@@ -182,6 +182,18 @@ export default function Projects() {
   const [selected, setSelected] = useState(null)
   const [filter,   setFilter]   = useState('all')
 
+  const [vw, setVw] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
+  useEffect(() => {
+    const onResize = () => setVw(window.innerWidth)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  const isMobile = vw < 640
+  const sidePad  = isMobile ? 20 : 32
+  const cardW    = isMobile ? vw - sidePad * 2 : CARD_W
+  const fadeW    = isMobile ? 0 : 48
+
   const filtered = filter === 'all'
     ? projects
     : projects.filter(p => p.category?.includes(filter))
@@ -210,14 +222,14 @@ export default function Projects() {
   }, [filter])
 
   const scroll = dir => {
-    scrollRef.current?.scrollBy({ left: dir * (CARD_W + GAP), behavior: 'smooth' })
+    scrollRef.current?.scrollBy({ left: dir * (cardW + GAP), behavior: 'smooth' })
   }
 
   const selectedProj = selected
 
   return (
     <section id="projects" style={{ padding: '108px 0', background: 'var(--surface)', direction: lang === 'ar' ? 'rtl' : 'ltr' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: `0 ${sidePad}px` }}>
 
         {/* Section header */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }}
@@ -272,8 +284,8 @@ export default function Projects() {
 
         {/* Carousel */}
         <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 48, zIndex: 2, background: 'linear-gradient(to right, var(--surface), transparent)', pointerEvents: 'none', opacity: canLeft ? 1 : 0, transition: 'opacity 0.2s' }}/>
-          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 48, zIndex: 2, background: 'linear-gradient(to left, var(--surface), transparent)', pointerEvents: 'none', opacity: canRight ? 1 : 0, transition: 'opacity 0.2s' }}/>
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: fadeW, zIndex: 2, background: 'linear-gradient(to right, var(--surface), transparent)', pointerEvents: 'none', opacity: canLeft ? 1 : 0, transition: 'opacity 0.2s' }}/>
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: fadeW, zIndex: 2, background: 'linear-gradient(to left, var(--surface), transparent)', pointerEvents: 'none', opacity: canRight ? 1 : 0, transition: 'opacity 0.2s' }}/>
 
           <div
             ref={scrollRef}
@@ -289,7 +301,7 @@ export default function Projects() {
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: i * 0.05 }}
                   whileHover={{ y: -4 }}
                   style={{
-                    width: CARD_W, minWidth: CARD_W, height: CARD_H,
+                    width: cardW, minWidth: cardW, height: CARD_H,
                     flexShrink: 0, scrollSnapAlign: 'start',
                     display: 'flex', flexDirection: 'column',
                     background: 'var(--bg)',

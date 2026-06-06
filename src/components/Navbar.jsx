@@ -125,10 +125,24 @@ export default function Navbar({ theme, onToggleTheme }) {
           >{t('nav.hire')}</a>
         </div>
 
-        {/* Mobile hamburger only */}
-        <button onClick={() => setOpen(!open)} className="nav-hamburger">
-          {open ? <X size={20}/> : <Menu size={20}/>}
-        </button>
+        {/* Mobile: language switcher + hamburger */}
+        <div className="nav-mobile-actions">
+          <button
+            onClick={toggleLang}
+            title={lang === 'en' ? 'التبديل إلى العربية' : 'Switch to English'}
+            style={{
+              height: 36, padding: '0 10px', borderRadius: 8, border: '1px solid var(--border)',
+              background: 'var(--surface)', color: 'var(--text-muted)', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600,
+            }}
+          >
+            <Languages size={15} />
+            {lang === 'en' ? 'العربية' : 'English'}
+          </button>
+          <button onClick={() => setOpen(!open)} className="nav-hamburger">
+            {open ? <X size={20}/> : <Menu size={20}/>}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -144,14 +158,6 @@ export default function Navbar({ theme, onToggleTheme }) {
                   borderBottom: '1px solid var(--border)',
                 }}>{t(l.key)}</button>
               ))}
-              <button onClick={() => { toggleLang(); setOpen(false) }} style={{
-                background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
-                textAlign: 'start', fontSize: 15, fontWeight: 500, color: 'var(--text-muted)',
-                display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border)',
-              }}>
-                <Languages size={16} />
-                {lang === 'en' ? 'العربية' : 'English'}
-              </button>
               <button onClick={() => { onToggleTheme(); setOpen(false) }} style={{
                 background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
                 textAlign: 'start', fontSize: 15, fontWeight: 500, color: 'var(--text-muted)',

@@ -267,6 +267,7 @@ textarea::placeholder {
 /* ─── Responsive layout helpers ─────────────────────────────── */
 .nav-desktop-links { display: flex; align-items: center; gap: 2px; }
 .nav-hamburger     { display: none; background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 4px; }
+.nav-mobile-actions { display: none; align-items: center; gap: 8px; }
 
 /* ─── Hero responsive ───────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -279,16 +280,16 @@ textarea::placeholder {
     overflow: visible !important;
   }
   .hero-copy { order: 1; text-align: inherit; }
-  .hero-copy > div:first-child { margin-bottom: 12px !important; }
+  .hero-available { display: none !important; }
   .hero-copy h1 { margin-bottom: 8px !important; justify-content: flex-start !important; text-align: inherit; }
   .hero-copy h2 { margin-bottom: 12px !important; }
   .hero-portrait { order: 2; height: auto !important; margin-bottom: 8px; overflow: visible !important; }
   .hero-portrait > div { width: min(280px, 70vw) !important; height: min(340px, 78vw) !important; overflow: visible !important; }
   .hero-portrait img { max-height: 100% !important; width: auto !important; transform: none !important; }
-  .hero-ring { width: min(300px, 68vw) !important; height: min(300px, 68vw) !important; }
+  .hero-ring { width: min(250px, 56vw) !important; height: min(250px, 56vw) !important; top: 59% !important; }
   .hero-ring-chevron { width: 56px !important; height: auto !important; }
-  .hero-ring-chevron-left { left: -16% !important; top: 12% !important; }
-  .hero-ring-chevron-right { right: -16% !important; bottom: 12% !important; }
+  .hero-ring-chevron-left { left: -6% !important; top: 12% !important; }
+  .hero-ring-chevron-right { right: -11% !important; bottom: 4% !important; }
   .hero-copy h1 { justify-content: flex-start !important; text-align: inherit; }
   .hero-row-center { justify-content: flex-start !important; margin-top: 8px !important; margin-bottom: 8px !important; }
   .hero-intro { margin-left: 0; margin-right: 0; margin-bottom: 12px !important; text-align: inherit; line-height: 1.4 !important; }
@@ -310,10 +311,10 @@ textarea::placeholder {
 @media (max-width: 680px) {
   .hero-grid { padding-top: 20px !important; gap: 12px !important; }
   .hero-portrait > div { width: min(260px, 76vw) !important; height: min(300px, 82vw) !important; }
-  .hero-ring { width: min(260px, 74vw) !important; height: min(260px, 74vw) !important; }
+  .hero-ring { width: min(230px, 62vw) !important; height: min(230px, 62vw) !important; top: 59% !important; }
   .hero-ring-chevron { width: 48px !important; }
-  .hero-ring-chevron-left { left: -18% !important; top: 14% !important; }
-  .hero-ring-chevron-right { right: -18% !important; bottom: 14% !important; }
+  .hero-ring-chevron-left { left: -7% !important; top: 14% !important; }
+  .hero-ring-chevron-right { right: -12% !important; bottom: 4% !important; }
   .hero-actions .hero-action-button {
     min-width: min(100px, 38vw);
     max-width: min(130px, 42vw);
@@ -329,8 +330,9 @@ textarea::placeholder {
 }
 
 @media (max-width: 768px) {
-  .nav-desktop-links { display: none !important; }
-  .nav-hamburger     { display: flex !important; align-items: center; justify-content: center; }
+  .nav-desktop-links  { display: none !important; }
+  .nav-hamburger      { display: flex !important; align-items: center; justify-content: center; }
+  .nav-mobile-actions { display: flex !important; }
 
   section { padding-top: 64px !important; padding-bottom: 64px !important; }
 }

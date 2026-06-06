@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
+import { ArrowRight, Mail, Sparkles } from 'lucide-react'
 import GridBg from './ParticlesBg'
 import { personal, skills } from '../data/portfolio'
 import { useI18n } from '../i18n'
@@ -70,6 +70,7 @@ export default function Hero({ onChatOpen }) {
         <div className="hero-copy" style={{ maxWidth: 620 }}>
           {/* Available badge */}
           <motion.div
+            className="hero-available"
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease, delay: 0.04 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 100, border: '1px solid var(--accent-border)', background: 'var(--accent-bg)', marginBottom: 26 }}
@@ -178,39 +179,6 @@ export default function Hero({ onChatOpen }) {
               <Mail size={16} />
               {t('hero.bottomTouch')}
             </a>
-          </motion.div>
-
-          {/* Social icons */}
-          <motion.div
-            className="hero-row-center"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.58 }}
-            style={{ display: 'flex', gap: 12, marginTop: 30 }}
-          >
-            {[
-              { icon: Github, href: personal.github, label: 'GitHub' },
-              { icon: Linkedin, href: personal.linkedin, label: 'LinkedIn' },
-              { icon: Mail, href: `mailto:${personal.email}`, label: 'Email' },
-            ].map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target={label === 'Email' ? undefined : '_blank'}
-                rel="noreferrer"
-                title={label}
-                style={{
-                  width: 40, height: 40, borderRadius: 8,
-                  background: 'var(--surface)', border: '1px solid var(--border)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'var(--text-dim)', textDecoration: 'none',
-                  transition: 'color 0.2s, border-color 0.2s, transform 0.2s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent-border)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-dim)'; e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)' }}
-              >
-                <Icon size={17} />
-              </a>
-            ))}
           </motion.div>
         </div>
 
