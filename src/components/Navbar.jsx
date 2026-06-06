@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Sun, Moon, Languages } from 'lucide-react'
+import { useI18n } from '../i18n'
 
 const links = [
-  { label: 'About',      href: '#about'      },
-  { label: 'Skills',     href: '#skills'     },
-  { label: 'Projects',   href: '#projects'   },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact',    href: '#contact'    },
+  { key: 'nav.about',      href: '#about'      },
+  { key: 'nav.projects',   href: '#projects'   },
+  { key: 'nav.experience', href: '#experience' },
+  { key: 'nav.contact',    href: '#contact'    },
 ]
 
 export default function Navbar({ theme, onToggleTheme }) {
+  const { t, lang, toggle: toggleLang } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive]     = useState('')
   const [open, setOpen]         = useState(false)
@@ -77,9 +78,26 @@ export default function Navbar({ theme, onToggleTheme }) {
               }}
                 onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.background = 'var(--border)' }}}
                 onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'none' }}}
-              >{l.label}</button>
+              >{t(l.key)}</button>
             )
           })}
+
+          {/* Language toggle */}
+          <button
+            onClick={toggleLang}
+            title={lang === 'en' ? 'التبديل إلى العربية' : 'Switch to English'}
+            style={{
+              marginLeft: 8, height: 36, padding: '0 12px', borderRadius: 8, border: '1px solid var(--border)',
+              background: 'var(--surface)', color: 'var(--text-muted)', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600,
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-border)'; e.currentTarget.style.color = 'var(--accent)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)' }}
+          >
+            <Languages size={15} />
+            {lang === 'en' ? 'العربية' : 'English'}
+          </button>
 
           {/* Theme toggle */}
           <button
@@ -104,7 +122,7 @@ export default function Navbar({ theme, onToggleTheme }) {
           }}
             onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
             onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >Hire Me</a>
+          >{t('nav.hire')}</a>
         </div>
 
         {/* Mobile hamburger only */}
@@ -121,14 +139,22 @@ export default function Navbar({ theme, onToggleTheme }) {
               {links.map(l => (
                 <button key={l.href} onClick={() => goto(l.href)} style={{
                   background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
-                  textAlign: 'left', fontSize: 15, fontWeight: 500,
+                  textAlign: 'start', fontSize: 15, fontWeight: 500,
                   color: active === l.href.slice(1) ? 'var(--accent)' : 'var(--text-muted)',
                   borderBottom: '1px solid var(--border)',
-                }}>{l.label}</button>
+                }}>{t(l.key)}</button>
               ))}
+              <button onClick={() => { toggleLang(); setOpen(false) }} style={{
+                background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
+                textAlign: 'start', fontSize: 15, fontWeight: 500, color: 'var(--text-muted)',
+                display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border)',
+              }}>
+                <Languages size={16} />
+                {lang === 'en' ? 'العربية' : 'English'}
+              </button>
               <button onClick={() => { onToggleTheme(); setOpen(false) }} style={{
                 background: 'none', border: 'none', cursor: 'pointer', padding: '10px 0',
-                textAlign: 'left', fontSize: 15, fontWeight: 500, color: 'var(--text-muted)',
+                textAlign: 'start', fontSize: 15, fontWeight: 500, color: 'var(--text-muted)',
                 display: 'flex', alignItems: 'center', gap: 8,
               }}>
                 {dark ? <Sun size={16} /> : <Moon size={16} />}

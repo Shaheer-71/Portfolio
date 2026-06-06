@@ -1,7 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Code2, Server, Database, Cloud, BarChart3 } from 'lucide-react'
 import { skills } from '../data/portfolio'
+
+const categoryIcons = {
+  'Frontend':         Code2,
+  'Backend & APIs':   Server,
+  'Databases':        Database,
+  'DevOps & Deploy':  Cloud,
+  'Data Engineering': BarChart3,
+}
 
 const colorMap = {
   cyan:   { accent: 'var(--cm-cyan-accent)',   bg: 'var(--cm-cyan-bg)',   border: 'var(--cm-cyan-border)',   hover: 'var(--cm-cyan-hover)'   },
@@ -110,8 +118,8 @@ export default function Skills() {
                 >
                   {/* Category header */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 22, flexShrink: 0 }}>
-                    <div style={{ width: 42, height: 42, borderRadius: 10, background: c.bg, border: `1px solid ${c.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>
-                      {cat.icon}
+                    <div style={{ width: 42, height: 42, borderRadius: 10, background: c.bg, border: `1px solid ${c.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      {(() => { const Icon = categoryIcons[cat.category] || Code2; return <Icon size={20} strokeWidth={1.75} style={{ color: c.accent }} /> })()}
                     </div>
                     <h3 style={{ fontSize: 15, fontWeight: 700, color: c.accent, letterSpacing: '-0.01em', margin: 0 }}>{cat.category}</h3>
                   </div>

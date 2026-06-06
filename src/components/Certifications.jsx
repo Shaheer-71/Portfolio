@@ -1,5 +1,12 @@
 import { motion } from 'framer-motion'
+import { Award, Cpu, Palette, BadgeCheck } from 'lucide-react'
 import { certifications, education } from '../data/portfolio'
+
+const certIcons = {
+  'OCI 2025 Certified AI Foundations Associate': Award,
+  'Artificial Intelligence Fundamentals':        Cpu,
+  'Foundations of UX Design':                     Palette,
+}
 
 const colorMap = {
   cyan:   { accent: 'var(--cm-cyan-accent)',   bg: 'var(--cm-cyan-bg)',   border: 'var(--cm-cyan-border)'   },
@@ -60,9 +67,9 @@ export default function Certifications() {
                     <div style={{
                       width: 48, height: 48, borderRadius: 12, flexShrink: 0,
                       background: c.bg, border: `1px solid ${c.border}`,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
-                      {cert.icon}
+                      {(() => { const Icon = certIcons[cert.name] || BadgeCheck; return <Icon size={22} strokeWidth={1.75} style={{ color: c.accent }} /> })()}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <h4 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 5, lineHeight: 1.4 }}>{cert.name}</h4>

@@ -1,25 +1,57 @@
 import { motion } from 'framer-motion'
 import { MapPin, Mail, Phone, Globe } from 'lucide-react'
-import { personal } from '../data/portfolio'
+import { useI18n } from '../i18n'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   visible: (i) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay: i * 0.1 } }),
 }
 
-const codeLines = [
+// Phrases to emphasize in the bio
+const HIGHLIGHTS = ['Full-stack developer', 'Web and Mobile apps', '50,000', 'Riyadh']
+function highlight(text) {
+  const escaped = HIGHLIGHTS.map(h => h.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  const pattern = new RegExp(`(${escaped.join('|')})`, 'g')
+  return text.split(pattern).map((part, i) =>
+    HIGHLIGHTS.includes(part)
+      ? <span key={i} style={{ color: 'var(--accent)', fontWeight: 600 }}>{part}</span>
+      : part
+  )
+}
+
+const codeLinesEn = [
   { key: 'name',        value: '"Muhammad Shaheer Gul"',        color: 'var(--text)' },
   { key: 'role',        value: '"Full Stack & Mobile Dev"',      color: 'var(--text)' },
   { key: 'experience',  value: '"5+ years"',                    color: 'var(--text)' },
-  { key: 'users',       value: '"50,000+"',                     color: 'var(--text)' },
-  { key: 'specialties', value: '["React", "React Native",',     color: 'var(--text)', multi: true },
-  { key: null,          value: ' "Node.js", "TypeScript"]',     color: 'var(--text)' },
+  { key: 'languages',   value: '["JavaScript", "TypeScript", ".NET"]', color: 'var(--text)' },
+  { key: 'frameworks',  value: '["React", "React Native", "Node.js",', color: 'var(--text)', multi: true },
+  { key: null,          value: ' ".NET MVC", "EF Core"], and 5+ more', color: 'var(--text)', multi: true },
+  { key: 'specialties', value: '["Mobile & Web", "Frontend & Backend",', color: 'var(--text)', multi: true },
+  { key: null,          value: ' "Full Stack", "DevOps", "Database"]', color: 'var(--text)' },
   { key: 'location',    value: '"Riyadh, Saudi Arabia"',     color: 'var(--text)' },
-  { key: 'iqama',       value: '"Transferable"',                color: 'var(--text)' },
-  { key: 'openTo',      value: 'true',                         color: 'var(--cm-purple-accent)' },
+  { key: 'education',   value: '"B.S. Computer Science"',       color: 'var(--text)' },
+  { key: 'certifications', value: '["Oracle OCI AI",',         color: 'var(--text)', multi: true },
+  { key: null,          value: ' "AI Foundations", "Google UX"]', color: 'var(--text)' },
+]
+
+const codeLinesAr = [
+  { key: 'الاسم',       value: '"Muhammad Shaheer Gul"',               color: 'var(--text)' },
+  { key: 'المسمى',      value: '"Full Stack & Mobile Dev"',            color: 'var(--text)' },
+  { key: 'الخبرة',      value: '"+5 years"',                           color: 'var(--text)' },
+  { key: 'اللغات',      value: '["JavaScript", "TypeScript", ".NET"]', color: 'var(--text)' },
+  { key: 'الأطر',       value: '["React", "React Native", "Node.js",', color: 'var(--text)', multi: true },
+  { key: null,          value: ' ".NET MVC", "EF Core"], and 5+ more', color: 'var(--text)', multi: true },
+  { key: 'التخصصات',    value: '["Mobile & Web", "Frontend & Backend",', color: 'var(--text)', multi: true },
+  { key: null,          value: ' "Full Stack", "DevOps", "Database"]', color: 'var(--text)' },
+  { key: 'الموقع',      value: '"Riyadh, Saudi Arabia"',              color: 'var(--text)' },
+  { key: 'التعليم',     value: '"B.S. Computer Science"',               color: 'var(--text)' },
+  { key: 'الشهادات',    value: '["Oracle OCI AI",',                  color: 'var(--text)', multi: true },
+  { key: null,          value: ' "AI Foundations", "Google UX"]',    color: 'var(--text)' },
 ]
 
 export default function About() {
+  const { t, tl, lang, personal } = useI18n()
+  const codeLines = lang === 'ar' ? codeLinesAr : codeLinesEn
   return (
     <section id="about" style={{ padding: '108px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
@@ -31,10 +63,10 @@ export default function About() {
           style={{ marginBottom: 72, textAlign: 'center' }}
         >
           <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--accent)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
-            Get to know me
+            {t('about.eyebrow')}
           </span>
           <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: 'var(--text)', letterSpacing: '-0.02em' }}>
-            About <span className="text-gradient">Me</span>
+            {t('about.titleA')} <span className="text-gradient">{t('about.titleB')}</span>
           </h2>
         </motion.div>
 
@@ -47,7 +79,7 @@ export default function About() {
               variants={fadeUp} custom={1}
               style={{ fontSize: 16, lineHeight: 1.85, color: 'var(--text-muted)', marginBottom: 36 }}
             >
-              {personal.summary}
+              {highlight(personal.summary)}
             </motion.p>
 
             {/* Contact rows */}
@@ -60,7 +92,7 @@ export default function About() {
                 { icon: Mail,   label: personal.email,                      href: `mailto:${personal.email}` },
                 { icon: Phone,  label: personal.phone,                      href: `tel:${personal.phone}` },
                 { icon: MapPin, label: personal.location },
-                { icon: Globe,  label: 'English & Urdu — C2 Proficiency' },
+                { icon: Globe,  label: t('about.languages') },
               ].map(({ icon: Icon, label, href }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={{
@@ -90,7 +122,7 @@ export default function About() {
               variants={fadeUp} custom={3}
               style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}
             >
-              {['Problem-Solving', 'Communication', 'Teamwork', 'Collaboration', 'Adaptability', 'Time Management'].map(s => (
+              {tl('about.soft').map(s => (
                 <span
                   key={s}
                   style={{
@@ -122,18 +154,18 @@ export default function About() {
                 <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--text-dim)', marginLeft: 10 }}>shaheer.json</span>
               </div>
 
-              {/* Code content */}
-              <div style={{ padding: '22px 24px', fontFamily: 'JetBrains Mono, monospace', fontSize: 13, lineHeight: 2 }}>
+              {/* Code content — render mixed-direction JSON correctly for Arabic mode */}
+              <div dir={lang === 'ar' ? 'rtl' : 'ltr'} style={{ padding: '22px 24px', fontFamily: 'JetBrains Mono, monospace', fontSize: 13, lineHeight: 2, whiteSpace: 'pre-wrap', direction: lang === 'ar' ? 'rtl' : 'ltr' }}>
                 <div style={{ color: 'var(--text-faint)' }}>{'{'}</div>
                 {codeLines.map((line, i) => (
-                  <div key={i} style={{ paddingLeft: 20 }}>
+                  <div key={i} style={{ paddingInlineStart: 20, paddingInlineEnd: 0, direction: lang === 'ar' ? 'rtl' : 'ltr' }}>
                     {line.key && (
-                      <span style={{ color: 'var(--text-dim)' }}>
+                      <span style={{ color: 'var(--text-dim)', unicodeBidi: 'isolate-override', direction: lang === 'ar' ? 'rtl' : 'ltr' }}>
                         "{line.key}"<span style={{ color: 'var(--text-faint)' }}>: </span>
                       </span>
                     )}
                     {!line.key && <span style={{ display: 'inline-block', width: 'calc(6ch + 4px)' }} />}
-                    <span style={{ color: line.color }}>{line.value}</span>
+                    <span style={{ color: line.color, unicodeBidi: 'isolate-override', direction: lang === 'ar' && /[\u0600-\u06FF]/.test(line.value) ? 'rtl' : 'ltr' }}>{line.value}</span>
                     {i < codeLines.length - 1 && !line.multi && <span style={{ color: 'var(--text-faint)' }}>,</span>}
                   </div>
                 ))}

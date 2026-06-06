@@ -1,22 +1,22 @@
 export const personal = {
   name: 'Muhammad Shaheer Gul',
-  title: 'Full Stack Developer & Mobile App Architect',
+  title: 'Full-Stack Developer · React & React Native',
   taglines: [
-    'Building scalable React & React Native apps',
-    'Crafting AI-powered interfaces',
-    'Delivering production solutions for 50K+ users',
-    'Full-Stack Engineer with 5+ years experience',
+    'React & React Native, in production',
+    'Five years. Real users.',
+    '50K users on one platform alone',
+    'Currently building field-ops software in Riyadh',
   ],
   email: 'devshaheer360@gmail.com',
   phone: '+966-536250307',
   location: 'Riyadh, Saudi Arabia',
   github: 'https://github.com/',
   linkedin: 'https://linkedin.com/in/',
-  summary: `Full Stack Developer and Mobile App Architect specializing in React and React Native with 5+ years of experience building scalable web and mobile applications. Proven experience developing multi-tenant platforms, real-time chat systems, dashboards, geolocation features, and AI-powered applications. Delivered production solutions serving 50K+ users and multiple organizations, focusing on clean UI/UX, reusable components, cross-platform development, and maintainable code.`,
+  summary: `Full-stack developer with five years shipping Web and Mobile apps to production. I've built legal-AI platforms, multi-tenant school systems, and field-operations tools — apps with real people behind them, 50,000 of them on one platform alone. Today I'm in Riyadh building employee and field-ops software for SANID. What I care about most is the unglamorous part: apps that stay fast, survive bad networks, and don't fall over in the field.`,
   stats: [
     { label: 'Years Experience', value: '5+' },
     { label: 'Users Served', value: '50K+' },
-    { label: 'Projects Delivered', value: '5+' },
+    { label: 'Projects Delivered', value: '10+' },
     { label: 'Organizations', value: '200+' },
   ],
 }
@@ -91,24 +91,24 @@ export const skills = [
 
 export const experience = [
   {
-    role: 'Front End Developer',
-    company: 'Team Yamama',
-    location: 'Remote, Saudi Arabia',
-    period: 'Dec 2024 – Dec 2025',
+    role: 'Full Stack Developer',
+    company: 'Saudi Financial Support Services Company – SANID',
+    location: 'Riyadh, Saudi Arabia',
+    period: 'Jan 2026 – Present',
     type: 'Full-time',
     color: 'cyan',
     highlights: [
-      'Implemented real-time geolocation & geofencing with React Native',
-      'Developed advanced push notifications with Notifee (foreground, background, killed state)',
-      'Fixed critical geofencing bug using Haversine formula replacing incorrect Euclidean calculation',
-      'Optimized app performance using React.memo, FlatList, and InteractionManager',
+      'Built ESS Portal — Employee Self-Service web app (React + Node.js) with Keycloak SSO & Odoo HR integration',
+      'Built Sanid Mobile App — React Native field operations app for FLM & CIT workflows',
+      'Implemented backend-driven dynamic navigation, ticket/trip management, and checklists',
+      'Engineered resumable media uploads (Tus + FTP), video compression, and offline handling',
     ],
   },
   {
     role: 'Full Stack Developer',
     company: 'Danalyx',
     location: 'Islamabad, Pakistan',
-    period: 'Sep 2023 – Oct 2024',
+    period: 'Sep 2023 – Dec 2025',
     type: 'Full-time',
     color: 'purple',
     highlights: [
@@ -122,37 +122,128 @@ export const experience = [
     role: 'MERN Stack Developer',
     company: 'Firefly',
     location: 'Rawalpindi, Pakistan',
-    period: 'Nov 2020 – Jun 2023',
+    period: 'Jun 2020 – Jun 2023',
     type: 'Full-time',
     color: 'green',
     highlights: [
+      'Joined as a MERN intern and grew into a full-time developer role',
       'Built AI Attorney — legal SaaS platform serving 50K+ users & 200+ law organizations',
       'Developed HUMRAAH — family planning app with 5K+ Google Play downloads',
       'Built SPO Campus Pro — multi-tenant school ERP with 20+ schools & 15K+ students',
       'Implemented real-time chat, geolocation, AI integrations, and Stripe payments',
     ],
   },
-  {
-    role: 'Internee',
-    company: 'Firefly',
-    location: 'Rawalpindi, Pakistan',
-    period: 'Jun 2020 – Nov 2020',
-    type: 'Internship',
-    color: 'pink',
-    highlights: [
-      'Started career with full MERN stack training',
-      'Contributed to frontend and mobile features',
-    ],
-  },
 ]
 
 export const projects = [
+  {
+    name: 'Sanid Mobile App',
+    subtitle: 'Field Operations App',
+    period: 'Mar 2026 – Present',
+    description:
+      "Field technicians needed one app for two completely different jobs (FLM and CIT). Instead of two builds, the navigation itself is driven by the backend and rebuilds per role. On top of that: resumable uploads for spotty job-site networks, trip and ticket management with SLA filters, and full Arabic/RTL support.",
+    highlights: [
+      'Backend-driven dynamic bottom-tab navigation with adaptive overflow menu',
+      'Ticket & trip management: SLA filters, GPS-aware refresh, status workflows, reassignment',
+      'Resumable media uploads (Tus + FTP), video compression, and progress banners',
+      'Offline/network handling, RTL/Arabic support, Firebase messaging & crashlytics',
+    ],
+    tech: ['React Native', 'TypeScript', 'React Navigation', 'Zustand', 'Firebase', 'tus-js-client', 'react-native-video', 'react-native-geolocation-service', 'i18next'],
+    stats: { workflows: 'FLM & CIT', platform: 'iOS & Android' },
+    category: ['mobile'],
+    links: [],
+    color: 'pink',
+    icon: '📱',
+  },
+  {
+    name: 'ESS Portal',
+    subtitle: 'Employee Self-Service Portal',
+    period: 'Jan 2026 – Mar 2026',
+    description:
+      "Staff had no single place to see their own HR data. I built a Dockerized self-service portal that plugs Keycloak SSO into Odoo HR — one secure login for payslips, leaves, attendance, expenses, policies, and documents, with PDFs streamed straight from the source.",
+    highlights: [
+      'Keycloak SSO with token validation on both frontend and API',
+      'Integrated Odoo HR as the data source for employee records & payslips',
+      'Document management: PDF streaming, downloads, and file uploads',
+      'Dockerized with Docker Compose + EC2 deployment guide',
+    ],
+    tech: ['React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js', 'Keycloak', 'Odoo', 'Docker', 'New Relic'],
+    stats: { auth: 'Keycloak SSO', source: 'Odoo HR' },
+    category: ['web'],
+    links: [
+      { label: 'Live Site', url: 'https://essportal.sanid.sa', type: 'live' },
+    ],
+    color: 'purple',
+    icon: '🧑‍💼',
+  },
+  {
+    name: 'Xcelerate',
+    subtitle: 'Field Services Platform',
+    period: 'Feb 2025 – Dec 2025',
+    description:
+      "A field-services app where technicians kept getting checked into the wrong job sites — the geofencing measured flat Euclidean distance instead of Haversine on a curved earth. I fixed the math, rebuilt notifications with Notifee so they fire in all three app states, and profiled the jank away with Flipper.",
+    highlights: [
+      'Fixed critical Haversine vs Euclidean geofencing formula bug',
+      'Replaced notification system with Notifee for all 3 app states',
+      'Performance profiling with Flipper — resolved multiple bottlenecks',
+      'Pixel-accurate Figma-to-React Native UI implementation',
+    ],
+    tech: ['React Native', 'TypeScript', 'Redux Toolkit', 'Notifee', 'react-native-geolocation-service', 'NativeWind', 'Reanimated', 'Jira'],
+    stats: { industry: 'Saudi Arabia', type: 'Field Services' },
+    category: ['mobile'],
+    links: [
+      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.xcelerate', type: 'store' },
+    ],
+    color: 'cyan',
+    icon: '🔧',
+  },
+  {
+    name: 'Metro Pakistan',
+    subtitle: 'E-Commerce & Retail Platform',
+    period: '2024',
+    description:
+      "Contributed to the web platform for one of Pakistan's largest cash-and-carry wholesale chains — product catalogue, order management, and wholesale pricing, all running in a high-traffic production environment with enterprise-scale data behind it.",
+    highlights: [
+      "Large-scale retail e-commerce platform for Pakistan's top wholesale chain",
+      'Product catalogue, order management, and wholesale pricing features',
+      'High-traffic production environment with enterprise-scale data',
+    ],
+    tech: ['React.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'REST APIs'],
+    stats: { scale: 'Enterprise', market: 'Pakistan' },
+    category: ['web'],
+    links: [
+      { label: 'Live Site', url: 'https://www.metro.pk/', type: 'live' },
+    ],
+    color: 'green',
+    icon: '🛒',
+  },
+  {
+    name: 'Cayuse',
+    subtitle: 'Research Management Platform',
+    period: 'Sep 2023 – Oct 2024',
+    description:
+      "A research platform holding millions of records across universities and hospitals. My work was the data side: tenant offboarding with PostgreSQL and AWS S3, Power BI dashboards wired straight to the database, and environment provisioning through Duplo Cloud.",
+    highlights: [
+      'Maintained millions of records across enterprise clients',
+      'Tenant data offboarding using PostgreSQL + AWS S3',
+      'Power BI dashboards connected directly to PostgreSQL',
+      'Environment provisioning via Duplo Cloud (AWS EC2 + PostgreSQL)',
+    ],
+    tech: ['PostgreSQL', 'AWS S3', 'AWS EC2', 'Power BI', 'Duplo Cloud', 'Bitbucket Pipelines', 'Confluence'],
+    stats: { records: 'Millions', clients: 'Enterprise' },
+    category: ['web'],
+    links: [
+      { label: 'Live Site', url: 'https://www.cayuse.com/', type: 'live' },
+    ],
+    color: 'pink',
+    icon: '🔬',
+  },
   {
     name: 'AI Attorney',
     subtitle: 'Legal AI SaaS Platform',
     period: 'May 2022 – Jun 2023',
     description:
-      'A legal tech SaaS platform for the Pakistani legal market. Helps lawyers, law firms, and legal organizations do legal research, review documents, draft agreements, and manage court cases using AI.',
+      "Legal research is slow and expensive. We built a SaaS that lets lawyers search case law in plain language — a RAG pipeline over Pinecone and GPT-4 — plus AI chat, a case diary, and Stripe billing. It grew to 50,000+ users and 200+ law firms.",
     highlights: [
       'Served 50,000+ users & 200+ law organizations',
       'RAG pipeline: Pinecone + GPT-4 for semantic legal case search',
@@ -161,6 +252,7 @@ export const projects = [
     ],
     tech: ['React Native', 'React.js', 'TypeScript', 'Redux Toolkit', 'RTK Query', 'Python/Django', 'OpenAI GPT-4', 'Pinecone', 'PostgreSQL', 'Stripe', 'Socket.io', 'Firebase', 'Sentry'],
     stats: { users: '50K+', orgs: '200+' },
+    category: ['web', 'mobile'],
     links: [
       { label: 'Live Site', url: 'https://www.aiattorney.com.pk/', type: 'live' },
     ],
@@ -172,7 +264,7 @@ export const projects = [
     subtitle: 'Family Planning Awareness App',
     period: 'Aug 2021 – May 2022',
     description:
-      'A family planning awareness mobile app for Pakistan. Connects the public with doctors for live consultation and health guidance, including nearby health facility locator.',
+      "An NGO family-planning app for Pakistan that connects people to doctors over live chat and finds nearby health facilities by location. Connectivity is unreliable out there, so forms queue offline and auto-submit the moment signal returns. 5,000+ downloads.",
     highlights: [
       '5,000+ Google Play downloads for NGO awareness platform',
       'Real-time WhatsApp-style doctor chat with Socket.io + Firebase',
@@ -181,6 +273,7 @@ export const projects = [
     ],
     tech: ['React Native', 'React.js', 'TypeScript', 'Redux Toolkit', 'Firebase', 'Socket.io', 'Tailwind CSS', 'Google Maps API', 'JWT', 'Sentry'],
     stats: { users: '5K+', downloads: 'Play Store' },
+    category: ['web', 'mobile'],
     links: [
       { label: 'Web App', url: 'https://humraah.firefly-techsolutions.com/', type: 'live' },
       { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.familyplaining&hl=en', type: 'store' },
@@ -193,7 +286,7 @@ export const projects = [
     subtitle: 'Multi-Tenant School ERP',
     period: 'Dec 2020 – Jul 2021',
     description:
-      'Multi-tenant school management ERP platform. Multiple schools enroll as separate tenants, each getting isolated data and workflows on the same platform.',
+      "A school ERP where every school is its own isolated tenant on shared infrastructure. Attendance, timetables, fees, and fines across web and mobile — with conflict detection baked into scheduling. Onboarded 20+ schools and 15,000+ students, automating roughly 85% of the manual admin work.",
     highlights: [
       'Onboarded 20+ schools and 15,000+ students',
       'Automated 85%+ of manual school processes',
@@ -202,70 +295,12 @@ export const projects = [
     ],
     tech: ['React.js', 'React Native', 'TypeScript', 'Redux Toolkit', 'RTK Query', 'Node.js', 'PostgreSQL', 'Socket.io', 'FCM', 'NodeMailer'],
     stats: { schools: '20+', students: '15K+' },
+    category: ['web', 'mobile'],
     links: [
       { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.SPO.SchoolMontitoringApp', type: 'store' },
     ],
     color: 'purple',
     icon: '🏫',
-  },
-  {
-    name: 'Cayuse',
-    subtitle: 'Research Management Platform',
-    period: 'Sep 2023 – Oct 2024',
-    description:
-      'Cloud-based research management platform used by universities, hospitals, and research organizations worldwide. Manages the full research lifecycle — proposals, grants, budgets, approvals, compliance.',
-    highlights: [
-      'Maintained millions of records across enterprise clients',
-      'Tenant data offboarding using PostgreSQL + AWS S3',
-      'Power BI dashboards connected directly to PostgreSQL',
-      'Environment provisioning via Duplo Cloud (AWS EC2 + PostgreSQL)',
-    ],
-    tech: ['PostgreSQL', 'AWS S3', 'AWS EC2', 'Power BI', 'Duplo Cloud', 'Bitbucket Pipelines', 'Confluence'],
-    stats: { records: 'Millions', clients: 'Enterprise' },
-    links: [
-      { label: 'Live Site', url: 'https://www.cayuse.com/', type: 'live' },
-    ],
-    color: 'pink',
-    icon: '🔬',
-  },
-  {
-    name: 'Xcelerate',
-    subtitle: 'Field Services Platform',
-    period: 'Feb 2025 – Dec 2025',
-    description:
-      'A field services and restoration platform connecting customers with repair/restoration service companies and their workers using real-time geolocation.',
-    highlights: [
-      'Fixed critical Haversine vs Euclidean geofencing formula bug',
-      'Replaced notification system with Notifee for all 3 app states',
-      'Performance profiling with Flipper — resolved multiple bottlenecks',
-      'Pixel-accurate Figma-to-React Native UI implementation',
-    ],
-    tech: ['React Native', 'TypeScript', 'Redux Toolkit', 'Notifee', 'react-native-geolocation-service', 'NativeWind', 'Reanimated', 'Jira'],
-    stats: { industry: 'Saudi Arabia', type: 'Field Services' },
-    links: [
-      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.xcelerate', type: 'store' },
-    ],
-    color: 'cyan',
-    icon: '🔧',
-  },
-  {
-    name: 'Metro Pakistan',
-    subtitle: 'E-Commerce & Retail Platform',
-    period: '2024',
-    description:
-      "Metro Pakistan's digital retail platform — one of Pakistan's largest cash & carry wholesale chains. Contributed to the web platform enabling customers to browse products, manage orders, and access wholesale pricing online.",
-    highlights: [
-      "Large-scale retail e-commerce platform for Pakistan's top wholesale chain",
-      'Product catalogue, order management, and wholesale pricing features',
-      'High-traffic production environment with enterprise-scale data',
-    ],
-    tech: ['React.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'REST APIs'],
-    stats: { scale: 'Enterprise', market: 'Pakistan' },
-    links: [
-      { label: 'Live Site', url: 'https://www.metro.pk/', type: 'live' },
-    ],
-    color: 'green',
-    icon: '🛒',
   },
 ]
 
@@ -324,16 +359,19 @@ export const chatbotSystemPrompt = `You are Shaheer's AI portfolio assistant. Yo
 Full Stack Developer specializing in React and React Native with 5+ years building scalable web and mobile applications. Delivered production solutions serving 50K+ users. Expert in frontend architecture, real-time systems, AI-powered interfaces, and cross-platform mobile development.
 
 ## Work Experience
-1. **Front End Developer** @ Team Yamama (Remote, Saudi Arabia) — Dec 2024 – Dec 2025
+1. **Full Stack Developer** @ Saudi Financial Support Services Company – SANID (Riyadh, Saudi Arabia) — Jan 2026 – Present
+   - Built ESS Portal (React + Node.js, Keycloak SSO + Odoo HR) and Sanid Mobile App (React Native field operations)
+
+2. **Front End Developer** @ Team Yamama (Remote, Saudi Arabia) — Dec 2024 – Dec 2025
    - React Native, geolocation/geofencing, Notifee push notifications, bug fixes, performance optimization
 
-2. **Full Stack Developer** @ Danalyx (Islamabad) — Sep 2023 – Oct 2024
+3. **Full Stack Developer** @ Danalyx (Islamabad) — Sep 2023 – Oct 2024
    - Cayuse research platform: PostgreSQL, AWS S3/EC2, Power BI, Duplo Cloud, millions of records
 
-3. **MERN Stack Developer** @ Firefly (Rawalpindi) — Nov 2020 – Jun 2023
+4. **MERN Stack Developer** @ Firefly (Rawalpindi) — Nov 2020 – Jun 2023
    - Built AI Attorney (50K+ users), HUMRAAH (5K+ downloads), SPO Campus Pro (20+ schools, 15K+ students)
 
-4. **Internee** @ Firefly — Jun 2020 – Nov 2020
+5. **Internee** @ Firefly — Jun 2020 – Nov 2020
 
 ## Projects
 ### AI Attorney — Legal AI SaaS
@@ -364,6 +402,19 @@ Full Stack Developer specializing in React and React Native with 5+ years buildi
 - Fixed critical geofencing bug (Haversine formula vs wrong Euclidean formula)
 - Replaced notification system with Notifee for all 3 app states
 - Performance profiling and optimization with Flipper
+
+### ESS Portal (SANID) — Employee Self-Service Portal
+- Dockerized portal integrating Keycloak SSO + Odoo HR
+- Employees access profile, attendance, payslips, leaves, expenses, policies
+- Document management: PDF streaming, downloads, file uploads
+- Tech: React, TypeScript, Vite, Tailwind, Node.js, Express, Keycloak, Odoo, Docker
+
+### Sanid Mobile App (SANID) — Field Operations App
+- React Native field operations app for FLM & CIT workflows
+- Backend-driven dynamic navigation, ticket & trip management with SLA filters
+- Resumable media uploads (Tus + FTP), video compression, offline handling
+- RTL/Arabic support, Firebase messaging & crashlytics
+- Tech: React Native, TypeScript, React Navigation, Zustand, Firebase, tus-js-client
 
 ## Skills
 - **Frontend**: React.js, React Native, JavaScript, TypeScript, Tailwind CSS, Redux Toolkit — Advanced

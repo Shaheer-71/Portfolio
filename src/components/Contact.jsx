@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Send, Calendar, CheckCircle, User, MessageSquare } from 'lucide-react'
-import { personal } from '../data/portfolio'
+import { useI18n } from '../i18n'
 import ScheduleCall from './ScheduleCall'
 
 const inputStyle = {
@@ -11,6 +11,7 @@ const inputStyle = {
 }
 
 function ContactForm() {
+  const { t } = useI18n()
   const [form, setForm]     = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState(null)
   const [errorMsg, setErrorMsg] = useState('')
@@ -45,13 +46,13 @@ function ContactForm() {
         <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
           <CheckCircle size={24} color="#10b981" />
         </div>
-        <h4 style={{ color: 'var(--text)', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Message Sent!</h4>
+        <h4 style={{ color: 'var(--text)', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>{t('form.successTitle')}</h4>
         <p style={{ color: 'var(--text-muted)', fontSize: 13, lineHeight: 1.6, margin: '0 0 16px' }}>
-          I'll get back to you within 24 hours.<br />Check your inbox for a confirmation.
+          {t('form.successBody')}
         </p>
         <button onClick={() => setStatus(null)}
           style={{ background: 'none', border: 'none', color: 'var(--text-dim)', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}>
-          Send another
+          {t('form.sendAnother')}
         </button>
       </div>
     )
@@ -64,7 +65,7 @@ function ContactForm() {
           <User size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
           <input
             style={{ ...inputStyle, paddingLeft: 34 }}
-            placeholder="Your Name"
+            placeholder={t('form.name')}
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             required
@@ -75,7 +76,7 @@ function ContactForm() {
           <input
             style={{ ...inputStyle, paddingLeft: 34 }}
             type="email"
-            placeholder="Your Email"
+            placeholder={t('form.email')}
             value={form.email}
             onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
             required
@@ -87,7 +88,7 @@ function ContactForm() {
         <MessageSquare size={14} color="var(--text-dim)" style={{ position: 'absolute', left: 12, top: 12, pointerEvents: 'none' }} />
         <textarea
           style={{ ...inputStyle, paddingLeft: 34, resize: 'none', height: 110, lineHeight: 1.6 }}
-          placeholder="Your message…"
+          placeholder={t('form.message')}
           value={form.message}
           onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
           required
@@ -116,18 +117,19 @@ function ContactForm() {
         onMouseLeave={e => { if (status !== 'loading') e.currentTarget.style.opacity = '1' }}
       >
         <Send size={15} />
-        {status === 'loading' ? 'Sending…' : 'Send Message'}
+        {status === 'loading' ? t('form.sending') : t('form.send')}
       </button>
     </form>
   )
 }
 
 const TABS = [
-  { label: 'Send Message',        icon: Send,     id: 'message' },
-  { label: 'Schedule Interview',  icon: Calendar, id: 'schedule' },
+  { labelKey: 'contact.tab.message',  icon: Send,     id: 'message' },
+  { labelKey: 'contact.tab.schedule', icon: Calendar, id: 'schedule' },
 ]
 
 export default function Contact() {
+  const { t, personal } = useI18n()
   const [activeTab, setActiveTab] = useState(0)
 
   return (
@@ -143,13 +145,13 @@ export default function Contact() {
           style={{ marginBottom: 72, textAlign: 'center' }}
         >
           <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--cm-purple-accent)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
-            Let's Connect
+            {t('contact.eyebrow')}
           </span>
           <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: 'var(--text)', letterSpacing: '-0.02em' }}>
-            Get In <span className="text-gradient-warm">Touch</span>
+            {t('contact.titleA')} <span className="text-gradient-warm">{t('contact.titleB')}</span>
           </h2>
           <p style={{ marginTop: 14, color: 'var(--text-dim)', maxWidth: 480, margin: '14px auto 0', fontSize: 14 }}>
-            Open to exciting opportunities, collaborations, and interesting projects. Let's build something great together.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -163,14 +165,14 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
           >
             <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 30, letterSpacing: '-0.02em' }}>
-              Contact Information
+              {t('contact.info')}
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
               {[
-                { icon: Mail,   label: 'Email',    value: personal.email,    href: `mailto:${personal.email}`,  color: 'var(--cm-cyan-accent)' },
-                { icon: Phone,  label: 'Phone',    value: personal.phone,    href: `tel:${personal.phone}`,     color: 'var(--cm-purple-accent)' },
-                { icon: MapPin, label: 'Location', value: personal.location,                                    color: 'var(--cm-green-accent)' },
+                { icon: Mail,   label: t('contact.label.email'),    value: personal.email,    href: `mailto:${personal.email}`,  color: 'var(--cm-cyan-accent)' },
+                { icon: Phone,  label: t('contact.label.phone'),    value: personal.phone,    href: `tel:${personal.phone}`,     color: 'var(--cm-purple-accent)' },
+                { icon: MapPin, label: t('contact.label.location'), value: personal.location,                                    color: 'var(--cm-green-accent)' },
               ].map(({ icon: Icon, label, value, href, color }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                   <div style={{
@@ -201,7 +203,7 @@ export default function Contact() {
             {/* Social icons */}
             <div style={{ marginTop: 40 }}>
               <div style={{ fontSize: 11, color: 'var(--text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14, fontFamily: 'JetBrains Mono, monospace' }}>
-                Find Me Online
+                {t('contact.findOnline')}
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 {[
@@ -220,13 +222,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Open to work chip */}
-            <div style={{ marginTop: 32 }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 14px', borderRadius: 100, fontSize: 12, fontWeight: 600, background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', color: '#10b981' }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-                Open to work
-              </span>
-            </div>
           </motion.div>
 
           {/* Right: Tabbed form */}
@@ -240,9 +235,9 @@ export default function Contact() {
 
               {/* Tab switcher */}
               <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: 'var(--surface2)', borderRadius: 10, padding: 4 }}>
-                {TABS.map(({ label, icon: Icon }, i) => (
+                {TABS.map(({ labelKey, icon: Icon }, i) => (
                   <button
-                    key={label}
+                    key={labelKey}
                     type="button"
                     onClick={() => setActiveTab(i)}
                     style={{
@@ -255,7 +250,7 @@ export default function Contact() {
                     }}
                   >
                     <Icon size={13} color={activeTab === i ? (i === 0 ? 'var(--cm-cyan-accent)' : 'var(--cm-purple-accent)') : 'var(--text-dim)'} />
-                    {label}
+                    {t(labelKey)}
                   </button>
                 ))}
               </div>
@@ -275,7 +270,7 @@ export default function Contact() {
           style={{ marginTop: 80, textAlign: 'center', paddingTop: 36, borderTop: '1px solid var(--border)' }}
         >
           <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--text-faint)' }}>
-            Designed &amp; Built by{' '}
+            {t('footer.by')}{' '}
             <span className="text-gradient" style={{ fontWeight: 700 }}>Muhammad Shaheer Gul</span>
             {' '}· 2026
           </span>

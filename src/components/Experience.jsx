@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Briefcase, Calendar, MapPin } from 'lucide-react'
-import { experience } from '../data/portfolio'
+import { useI18n } from '../i18n'
 
 const colorMap = {
   cyan:   { accent: 'var(--cm-cyan-accent)',   bg: 'var(--cm-cyan-bg)',   border: 'var(--cm-cyan-border)'   },
@@ -10,6 +10,7 @@ const colorMap = {
 }
 
 export default function Experience() {
+  const { t, experience } = useI18n()
   return (
     <section id="experience" style={{ padding: '108px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
@@ -22,10 +23,10 @@ export default function Experience() {
           style={{ marginBottom: 72, textAlign: 'center' }}
         >
           <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, color: 'var(--accent)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
-            Career Path
+            {t('exp.eyebrow')}
           </span>
           <h2 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, marginTop: 10, color: 'var(--text)', letterSpacing: '-0.02em' }}>
-            Work <span className="text-gradient">Experience</span>
+            {t('exp.titleA')} <span className="text-gradient">{t('exp.titleB')}</span>
           </h2>
         </motion.div>
 

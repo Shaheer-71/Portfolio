@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
-import Skills from './components/Skills'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
-import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import ChatBot from './components/ChatBot'
 
@@ -25,10 +23,8 @@ export default function App() {
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <Hero onChatOpen={() => setChatOpen(true)} />
       <About />
-      <Skills />
       <Projects />
       <Experience />
-      <Certifications />
       <Contact />
       <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(prev => !prev)} />
 

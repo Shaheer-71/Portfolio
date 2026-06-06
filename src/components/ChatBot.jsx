@@ -325,7 +325,7 @@ export default function ChatBot({ isOpen, onClose }) {
                   style={{
                     flex: 1, background: 'none', border: 'none', outline: 'none',
                     color: 'var(--text)', fontSize: 13, lineHeight: 1.5, resize: 'none',
-                    fontFamily: 'Inter, sans-serif', maxHeight: 80, overflowY: 'auto',
+                    fontFamily: 'Satoshi, sans-serif', maxHeight: 80, overflowY: 'auto',
                   }}
                   onInput={e => {
                     e.target.style.height = 'auto'
