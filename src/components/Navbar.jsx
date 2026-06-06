@@ -54,10 +54,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         <a href="#" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
           style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg, var(--accent), var(--gradient-to))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 12L8 3.5L13 12" stroke={dark ? '#020C1B' : '#fff'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M5.2 9H10.8" stroke={dark ? '#020C1B' : '#fff'} strokeWidth="1.8" strokeLinecap="round"/>
-            </svg>
+            <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 16, fontWeight: 800, lineHeight: 1, color: dark ? '#020C1B' : '#fff' }}>S</span>
           </div>
           <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 14, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
             shaheer<span style={{ color: 'var(--accent)' }}>.dev</span>
