@@ -14,6 +14,7 @@ const UI = {
     'hero.titleL1': 'Full Stack', 'hero.titleL2': 'Developer',
     'hero.intro': 'I build Web & Mobile apps used by 50K+ people — currently shipping field-ops software in Riyadh.',
     'hero.ctaProject': 'Got a project?', 'hero.ctaResume': 'My resume',
+    'hero.bottomWork': 'View My Work', 'hero.bottomChat': 'Chat with AI', 'hero.bottomTouch': 'Get in Touch',
 
     'about.eyebrow': 'Get to know me', 'about.titleA': 'About', 'about.titleB': 'Me',
     'about.languages': 'English & Urdu — C2 Proficiency',
@@ -47,6 +48,7 @@ const UI = {
     'hero.titleL1': 'مطوّر', 'hero.titleL2': 'متكامل',
     'hero.intro': 'أبني تطبيقات ويب وموبايل يستخدمها أكثر من 50 ألف شخص — وأعمل حالياً على برمجيات العمليات الميدانية في الرياض.',
     'hero.ctaProject': 'لديك مشروع؟', 'hero.ctaResume': 'سيرتي الذاتية',
+    'hero.bottomWork': 'عرض أعمالي', 'hero.bottomChat': 'الدردشة مع الذكاء الاصطناعي', 'hero.bottomTouch': 'تواصل معي',
 
     'about.eyebrow': 'تعرّف عليّ', 'about.titleA': 'نبذة', 'about.titleB': 'عنّي',
     'about.languages': 'الإنجليزية والأردية — إتقان C2',

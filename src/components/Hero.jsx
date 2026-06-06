@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
 import GridBg from './ParticlesBg'
 import { personal, skills } from '../data/portfolio'
 import { useI18n } from '../i18n'
@@ -41,7 +41,7 @@ function Chevron({ dir = 'left', size = 92, style }) {
   )
 }
 
-export default function Hero() {
+export default function Hero({ onChatOpen }) {
   const { t } = useI18n()
   const [imgOk, setImgOk] = useState(true)
 
@@ -279,6 +279,59 @@ export default function Hero() {
             </span>
           ))}
         </div>
+      </motion.div>
+
+      {/* Bottom hero actions */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.9 }}
+        style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', padding: '24px 40px 32px' }}
+      >
+        <button
+          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+          style={{
+            padding: '14px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
+            background: 'var(--accent)', border: '1px solid var(--accent)', color: 'var(--bg)',
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            transition: 'opacity 0.2s, transform 0.2s', letterSpacing: '-0.01em',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
+        >
+          {t('hero.bottomWork')}
+          <ArrowRight size={16} />
+        </button>
+
+        <button
+          onClick={onChatOpen}
+          style={{
+            padding: '14px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
+            background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-muted)',
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            transition: 'border-color 0.2s, color 0.2s, transform 0.2s', letterSpacing: '-0.01em',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-border)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateY(0)' }}
+        >
+          <Sparkles size={16} />
+          {t('hero.bottomChat')}
+        </button>
+
+        <a
+          href={`mailto:${personal.email}`}
+          style={{
+            padding: '14px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer',
+            background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-dim)',
+            display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none',
+            transition: 'border-color 0.2s, color 0.2s, transform 0.2s', letterSpacing: '-0.01em',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-dim)'; e.currentTarget.style.transform = 'translateY(0)' }}
+        >
+          <Mail size={16} />
+          {t('hero.bottomTouch')}
+        </a>
       </motion.div>
     </section>
   )
