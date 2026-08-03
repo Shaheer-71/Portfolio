@@ -3,7 +3,7 @@ export const personal = {
   title: 'Full-Stack Developer · React & React Native',
   taglines: [
     'React & React Native, in production',
-    'Five years. Real users.',
+    'Six years. Real users.',
     '50K users on one platform alone',
     'Currently building field-ops software in Riyadh',
   ],
@@ -12,9 +12,9 @@ export const personal = {
   location: 'Riyadh, Saudi Arabia',
   github: 'https://github.com/Shaheer-71',
   linkedin: 'https://www.linkedin.com/in/shaheer71/',
-  summary: `Full-stack developer with five years shipping Web and Mobile apps to production. I've built legal-AI platforms, multi-tenant school systems, and field-operations tools — apps with real people behind them, 50,000 of them on one platform alone. Today I'm in Riyadh building employee and field-ops software for SANID. What I care about most is the unglamorous part: apps that stay fast, survive bad networks, and don't fall over in the field.`,
+  summary: `Full-stack developer with six years shipping Web and Mobile apps to production. I've built legal-AI platforms, multi-tenant school systems, and field-operations tools — apps with real people behind them, 50,000 of them on one platform alone. Today I'm in Riyadh building employee and field-ops software for SANID. What I care about most is the unglamorous part: apps that stay fast, survive bad networks, and don't fall over in the field.`,
   stats: [
-    { label: 'Years Experience', value: '5+' },
+    { label: 'Years Experience', value: '6+' },
     { label: 'Users Served', value: '50K+' },
     { label: 'Projects Delivered', value: '10+' },
     { label: 'Organizations', value: '200+' },
@@ -98,8 +98,8 @@ export const experience = [
     type: 'Full-time',
     color: 'cyan',
     highlights: [
-      'Built ESS Portal — Employee Self-Service web app (React + Node.js) with Keycloak SSO & Odoo HR integration',
-      'Built Sanid Mobile App — React Native field operations app for FLM & CIT workflows',
+      'Built mySanid — Employee Self-Service web & mobile app (React + Node.js) with Keycloak SSO & Odoo HR integration',
+      'Built Sanid-360 — React Native field operations app for FLM & CIT workflows',
       'Implemented backend-driven dynamic navigation, ticket/trip management, and checklists',
       'Engineered resumable media uploads (Tus + FTP), video compression, and offline handling',
     ],
@@ -137,7 +137,7 @@ export const experience = [
 
 export const projects = [
   {
-    name: 'Sanid Mobile App',
+    name: 'Sanid-360',
     subtitle: 'Field Operations App',
     period: 'Mar 2026 – Present',
     description:
@@ -151,12 +151,15 @@ export const projects = [
     tech: ['React Native', 'TypeScript', 'React Navigation', 'Zustand', 'Firebase', 'tus-js-client', 'react-native-video', 'react-native-geolocation-service', 'i18next'],
     stats: { workflows: 'FLM & CIT', platform: 'iOS & Android' },
     category: ['mobile'],
-    links: [],
+    links: [
+      { label: 'App Store', url: 'https://apps.apple.com/us/app/sanid360/id6777723039', type: 'appstore' },
+      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.sanid.sanidportaldev', type: 'store' },
+    ],
     color: 'pink',
     icon: '📱',
   },
   {
-    name: 'ESS Portal',
+    name: 'mySanid',
     subtitle: 'Employee Self-Service Portal',
     period: 'Jan 2026 – Mar 2026',
     description:
@@ -172,6 +175,8 @@ export const projects = [
     category: ['web'],
     links: [
       { label: 'Live Site', url: 'https://essportal.sanid.sa', type: 'live' },
+      { label: 'App Store', url: 'https://apps.apple.com/us/app/mysanid/id6780399436', type: 'appstore' },
+      { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.sanid.essportal', type: 'store' },
     ],
     color: 'purple',
     icon: '🧑‍💼',
@@ -349,7 +354,7 @@ export const chatbotSystemPrompt = `You are Shaheer's AI portfolio assistant. Yo
 ## About Shaheer
 - **Full Name**: Muhammad Shaheer Gul
 - **Title**: Full Stack Developer & Mobile App Architect
-- **Experience**: 5+ years
+- **Experience**: 6+ years
 - **Location**: Riyadh, Saudi Arabia (Transferable Iqama)
 - **Email**: devshaheer360@gmail.com
 - **Phone**: +966-536250307
@@ -358,11 +363,11 @@ export const chatbotSystemPrompt = `You are Shaheer's AI portfolio assistant. Yo
 - **Languages**: Urdu (C2), English (C2)
 
 ## Summary
-Full Stack Developer specializing in React and React Native with 5+ years building scalable web and mobile applications. Delivered production solutions serving 50K+ users. Expert in frontend architecture, real-time systems, AI-powered interfaces, and cross-platform mobile development.
+Full Stack Developer specializing in React and React Native with 6+ years building scalable web and mobile applications. Delivered production solutions serving 50K+ users. Expert in frontend architecture, real-time systems, AI-powered interfaces, and cross-platform mobile development.
 
 ## Work Experience
 1. **Full Stack Developer** @ Saudi Financial Support Services Company – SANID (Riyadh, Saudi Arabia) — Jan 2026 – Present
-   - Built ESS Portal (React + Node.js, Keycloak SSO + Odoo HR) and Sanid Mobile App (React Native field operations)
+   - Built mySanid (React + Node.js, Keycloak SSO + Odoo HR) and Sanid-360 (React Native field operations)
 
 2. **Front End Developer** @ Team Yamama (Remote, Saudi Arabia) — Dec 2024 – Dec 2025
    - React Native, geolocation/geofencing, Notifee push notifications, bug fixes, performance optimization
@@ -378,14 +383,14 @@ Full Stack Developer specializing in React and React Native with 5+ years buildi
 ## Projects
 For each project below: "Role" = what Shaheer personally did, "Challenge → Solution" = a problem he faced and how he solved it.
 
-### Sanid Mobile App (SANID) — Field Operations App · Mar 2026–Present
+### Sanid-360 (SANID) — Field Operations App · Mar 2026–Present
 - Role: React Native developer — built the app end-to-end
 - Challenge → Solution: Field technicians needed one app for two very different jobs (FLM and CIT). Instead of two separate builds, Shaheer made the navigation backend-driven so the bottom tabs rebuild per role, with an adaptive overflow menu when there are too many screens.
 - Challenge → Solution: Uploads kept failing on spotty job-site networks. He added resumable media uploads (Tus + FTP) with video compression and resume-on-reconnect plus progress banners.
 - Also: ticket & trip management with SLA filters and GPS-aware refresh, RTL/Arabic support, Firebase messaging & crashlytics
 - Tech: React Native, TypeScript, React Navigation, Zustand, Firebase, tus-js-client
 
-### ESS Portal (SANID) — Employee Self-Service Portal · Jan–Mar 2026
+### mySanid (SANID) — Employee Self-Service Portal · Jan–Mar 2026
 - Role: Full-stack developer — built the portal (frontend + Node API)
 - Challenge → Solution: Staff had no single secure place to see their own HR data. He plugged Keycloak SSO into Odoo HR with token validation on both frontend and API, giving one login for payslips, leaves, attendance, expenses, policies and documents, with PDFs streamed straight from the source.
 - Also: Dockerized with Docker Compose + an EC2 deployment guide
@@ -456,5 +461,5 @@ Problem-Solving, Communication, Teamwork, Collaboration, Adaptability, Time Mana
 - If asked about Shaheer's role, contribution, challenges, or "how did he solve X" on a project, use the Role and Challenge → Solution details in the Projects section
 - If asked about availability or hiring, say Shaheer is open to exciting opportunities
 - For salary/rate questions, suggest contacting Shaheer directly via email
-- Refer to Shaheer in third person (e.g., "Shaheer has 5+ years...")
+- Refer to Shaheer in third person (e.g., "Shaheer has 6+ years...")
 - Don't make up information not provided above`

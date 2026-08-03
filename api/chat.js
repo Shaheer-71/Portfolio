@@ -9,7 +9,7 @@ PERSONAL INFO
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 - Full name: Muhammad Shaheer Gul
 - Title: Full Stack Developer & Mobile App Architect
-- Experience: 5+ years
+- Experience: 6+ years
 - Location: Riyadh, Saudi Arabia
 - Iqama: Transferable (open to relocate within Saudi or internationally)
 - Email: devshaheer360@gmail.com
@@ -22,7 +22,18 @@ PERSONAL INFO
 WORK EXPERIENCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. FRONT END DEVELOPER — Team Yamama (Dec 2024 – Dec 2025, Remote Saudi Arabia)
+1. FULL STACK DEVELOPER — Saudi Financial Support Services Company – SANID (Jan 2026 – Present, Riyadh Saudi Arabia)
+   Role: Built mySanid (Employee Self-Service portal + app) and Sanid-360 (field operations app) end-to-end
+   - Built mySanid: Employee Self-Service web & mobile app (React + Node.js) with Keycloak SSO and Odoo HR integration — one login for payslips, leaves, attendance, expenses, policies, and documents, with PDFs streamed straight from the source
+   - Built Sanid-360: React Native field operations app for FLM (Facility/Line Maintenance) and CIT workflows
+   - Implemented backend-driven dynamic bottom-tab navigation that rebuilds per role, with an adaptive overflow menu
+   - Built ticket & trip management with SLA filters, GPS-aware refresh, status workflows, and reassignment
+   - Engineered resumable media uploads (Tus + FTP), video compression, and offline/network handling
+   - Full Arabic/RTL support, Firebase messaging & crashlytics
+   - Dockerized mySanid with Docker Compose + EC2 deployment guide
+   - Tools: React, React Native, TypeScript, Vite, Node.js, Express.js, Keycloak, Odoo, Docker, Zustand, Firebase, tus-js-client
+
+2. FRONT END DEVELOPER — Team Yamama (Dec 2024 – Dec 2025, Remote Saudi Arabia)
    Role: Led frontend development of Xcelerate, a field services mobile app
    - Built real-time geolocation tracking and geofencing with React Native
    - Fixed a critical bug: previous dev used Euclidean distance formula for geofencing instead of Haversine formula — this caused incorrect boundary detection. Shaheer identified and fixed it completely.
@@ -31,7 +42,7 @@ WORK EXPERIENCE
    - Did pixel-accurate Figma-to-React Native implementation
    - Tools: React Native, TypeScript, Redux Toolkit, Notifee, NativeWind, Reanimated, Jira
 
-2. FULL STACK DEVELOPER — Danalyx (Sep 2023 – Oct 2024, Islamabad Pakistan)
+3. FULL STACK DEVELOPER — Danalyx (Sep 2023 – Oct 2024, Islamabad Pakistan)
    Role: Maintained and scaled Cayuse, an enterprise research management platform
    - Managed large-scale databases with millions of records
    - Performed tenant data offboarding: migrated/deleted tenant data from PostgreSQL and AWS S3 safely
@@ -40,7 +51,7 @@ WORK EXPERIENCE
    - Worked with Bitbucket Pipelines for CI/CD, Confluence for documentation
    - Tools: PostgreSQL, AWS S3, AWS EC2, Power BI, Duplo Cloud, Bitbucket Pipelines
 
-3. MERN STACK DEVELOPER — Firefly (Nov 2020 – Jun 2023, Rawalpindi Pakistan)
+4. MERN STACK DEVELOPER — Firefly (Nov 2020 – Jun 2023, Rawalpindi Pakistan)
    Role: Core developer building 3 major products from scratch
    - Built AI Attorney (legal SaaS) — full-stack, served 50K+ users
    - Built HUMRAAH (family planning app) — React Native + web
@@ -49,7 +60,7 @@ WORK EXPERIENCE
    - Integrated AI (OpenAI GPT-4) and vector search (Pinecone) for legal research
    - Stripe payment integration, RBAC auth, crash reporting with Sentry
 
-4. INTERNEE — Firefly (Jun 2020 – Nov 2020, Rawalpindi Pakistan)
+5. INTERNEE — Firefly (Jun 2020 – Nov 2020, Rawalpindi Pakistan)
    - Started career with full MERN stack training
    - Contributed to frontend and mobile features under senior guidance
 
@@ -57,7 +68,32 @@ WORK EXPERIENCE
 PROJECTS — DETAILED
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. AI ATTORNEY (May 2022 – Jun 2023)
+1. MYSANID (Jan 2026 – Mar 2026)
+   Live: https://essportal.sanid.sa
+   App Store: https://apps.apple.com/us/app/mysanid/id6780399436
+   Play Store: https://play.google.com/store/apps/details?id=com.sanid.essportal
+   What it is: Employee Self-Service portal & app for SANID (Saudi Financial Support Services Company) — one secure login for payslips, leaves, attendance, expenses, policies, and documents.
+   Shaheer's role: Full-stack developer — built the portal end-to-end (frontend + Node API)
+   Key contributions:
+   - Integrated Keycloak SSO with token validation on both frontend and API
+   - Integrated Odoo HR as the data source for employee records & payslips
+   - Document management: PDF streaming, downloads, and file uploads
+   - Dockerized with Docker Compose + EC2 deployment guide
+   Tech: React.js, TypeScript, Vite, Tailwind CSS, Node.js, Express.js, Keycloak, Odoo, Docker, New Relic
+
+2. SANID-360 (Mar 2026 – Present)
+   App Store: https://apps.apple.com/us/app/sanid360/id6777723039
+   Play Store: https://play.google.com/store/apps/details?id=com.sanid.sanidportaldev
+   What it is: Field operations app for SANID field technicians covering two workflows — FLM and CIT — in one app.
+   Shaheer's role: React Native developer — built the app end-to-end
+   Key contributions:
+   - Backend-driven dynamic bottom-tab navigation that rebuilds per role, with an adaptive overflow menu
+   - Ticket & trip management: SLA filters, GPS-aware refresh, status workflows, reassignment
+   - Resumable media uploads (Tus + FTP), video compression, and progress banners for spotty job-site networks
+   - Offline/network handling, full Arabic/RTL support, Firebase messaging & crashlytics
+   Tech: React Native, TypeScript, React Navigation, Zustand, Firebase, tus-js-client, react-native-video, react-native-geolocation-service, i18next
+
+3. AI ATTORNEY (May 2022 – Jun 2023)
    Live: https://www.aiattorney.com.pk/
    What it is: Legal AI SaaS platform for the Pakistani legal market — helps lawyers, law firms, and legal organizations do research, draft documents, manage cases using AI.
    Shaheer's role: Full-stack developer (web + mobile)
@@ -72,7 +108,7 @@ PROJECTS — DETAILED
    - Both React.js web app and React Native mobile app
    Tech: React Native, React.js, TypeScript, Redux Toolkit, RTK Query, Python/Django, OpenAI GPT-4, Pinecone, PostgreSQL, Stripe, Socket.io, Firebase, Sentry
 
-2. HUMRAAH (Aug 2021 – May 2022)
+4. HUMRAAH (Aug 2021 – May 2022)
    Web: https://humraah.firefly-techsolutions.com/
    Play Store: https://play.google.com/store/apps/details?id=com.familyplaining&hl=en
    What it is: Family planning awareness platform for Pakistan — connects public with doctors for live consultations, health guidance, nearby facility locator.
@@ -85,7 +121,7 @@ PROJECTS — DETAILED
    - Both React.js web platform and React Native mobile app
    Tech: React Native, React.js, TypeScript, Redux Toolkit, Firebase, Socket.io, Tailwind CSS, Google Maps API, JWT, Sentry
 
-3. SPO CAMPUS PRO (Dec 2020 – Jul 2021)
+5. SPO CAMPUS PRO (Dec 2020 – Jul 2021)
    Play Store: https://play.google.com/store/apps/details?id=com.SPO.SchoolMontitoringApp
    What it is: Multi-tenant school management ERP — multiple schools enroll as separate tenants with isolated data and workflows.
    Shaheer's role: Full-stack developer (web + mobile)
@@ -99,7 +135,7 @@ PROJECTS — DETAILED
    - Web admin panel + React Native mobile app for teachers/students
    Tech: React.js, React Native, TypeScript, Redux Toolkit, RTK Query, Node.js, PostgreSQL, Socket.io, FCM, NodeMailer
 
-4. CAYUSE (Sep 2023 – Oct 2024)
+6. CAYUSE (Sep 2023 – Oct 2024)
    Live: https://www.cayuse.com/
    What it is: Enterprise cloud-based research management platform used by universities, hospitals, and research organizations worldwide. Manages research lifecycle — proposals, grants, budgets, approvals, compliance.
    Shaheer's role: Full stack developer / data engineer at Danalyx (the company managing Cayuse)
@@ -111,7 +147,7 @@ PROJECTS — DETAILED
    - AWS environment provisioning via Duplo Cloud (EC2, RDS PostgreSQL)
    Tech: PostgreSQL, AWS S3, AWS EC2, Power BI, Duplo Cloud, Bitbucket Pipelines, Confluence
 
-5. XCELERATE (Feb 2025 – Dec 2025)
+7. XCELERATE (Feb 2025 – Dec 2025)
    Play Store: https://play.google.com/store/apps/details?id=com.xcelerate
    What it is: Field services and restoration platform in Saudi Arabia — connects customers with repair/restoration service companies and their field workers via real-time geolocation.
    Shaheer's role: Front End Developer at Team Yamama
@@ -122,7 +158,7 @@ PROJECTS — DETAILED
    - Pixel-accurate Figma-to-code UI implementation
    Tech: React Native, TypeScript, Redux Toolkit, Notifee, react-native-geolocation-service, NativeWind, Reanimated, Jira
 
-6. METRO PAKISTAN (2024)
+8. METRO PAKISTAN (2024)
    Live: https://www.metro.pk/
    What it is: Metro Pakistan's digital retail platform — one of Pakistan's largest cash & carry wholesale chains.
    Shaheer's role: Frontend developer contributing to the web platform

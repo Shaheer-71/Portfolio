@@ -4,8 +4,8 @@ import { ChevronLeft, ChevronRight, X, ExternalLink, ShoppingBag, Smartphone, Us
 import { useI18n } from '../i18n'
 
 const projectIcons = {
-  'Sanid Mobile App': Smartphone,
-  'ESS Portal':       UserCog,
+  'Sanid-360':        Smartphone,
+  'mySanid':          UserCog,
   'Xcelerate':        Wrench,
   'Metro Pakistan':   ShoppingCart,
   'Cayuse':           FlaskConical,
@@ -38,9 +38,19 @@ function PlayStoreIcon({ size = 13 }) {
   )
 }
 
+// App Store (Apple) icon as SVG
+function AppStoreIcon({ size = 13 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.05 12.536c-.02-2.05 1.678-3.037 1.754-3.083-.955-1.395-2.442-1.587-2.973-1.61-1.267-.128-2.472.746-3.113.746-.643 0-1.635-.727-2.687-.708-1.383.021-2.66.804-3.372 2.043-1.44 2.494-.368 6.185 1.033 8.207.686.984 1.501 2.09 2.573 2.05 1.033-.04 1.423-.663 2.673-.663 1.248 0 1.6.663 2.687.643 1.11-.02 1.812-1.003 2.492-1.99.785-1.144 1.108-2.253 1.126-2.31-.024-.011-2.163-.828-2.183-3.325zM15.058 5.775c.567-.69.95-1.647.846-2.6-.817.033-1.808.545-2.394 1.234-.526.61-.985 1.593-.86 2.53.917.07 1.842-.465 2.408-1.164z"/>
+    </svg>
+  )
+}
+
 function LinkButton({ link, accent, bg, border }) {
   const { t } = useI18n()
   const isStore = link.type === 'store'
+  const isAppStore = link.type === 'appstore'
   return (
     <a
       href={link.url}
@@ -56,7 +66,7 @@ function LinkButton({ link, accent, bg, border }) {
       onMouseEnter={e => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.transform = 'translateY(-1px)' }}
       onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
     >
-      {isStore ? <PlayStoreIcon size={12} /> : <ExternalLink size={12} />}
+      {isAppStore ? <AppStoreIcon size={12} /> : isStore ? <PlayStoreIcon size={12} /> : <ExternalLink size={12} />}
       {t(link.label)}
     </a>
   )

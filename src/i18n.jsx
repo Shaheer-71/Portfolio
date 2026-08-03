@@ -12,7 +12,7 @@ const UI = {
     'hero.available': 'Available for projects',
     'hero.hello': 'Hello', 'hero.im': "I'm", 'hero.name': 'Shaheer',
     'hero.titleL1': 'Full Stack', 'hero.titleL2': 'Developer',
-    'hero.intro': 'I build Web & Mobile apps used by 50K+ people — currently shipping field-ops software in Riyadh.',
+    'hero.intro': 'I build Web & Mobile apps used by 50K+ people with 6+ years of experience — currently shipping field-ops software in Riyadh.',
     'hero.ctaProject': 'Got a project?', 'hero.ctaResume': 'My resume',
     'hero.bottomWork': 'View My Work', 'hero.bottomChat': 'Chat with AI', 'hero.bottomTouch': 'Get in Touch',
 
@@ -24,7 +24,7 @@ const UI = {
     'projects.filter.all': 'All', 'projects.filter.web': 'Web', 'projects.filter.mobile': 'Mobile',
     'projects.viewDetails': 'view details', 'projects.underConstruction': 'Under construction',
     'projects.keyHighlights': 'Key Highlights', 'projects.techStack': 'Tech Stack',
-    'Live Site': 'Live Site', 'Play Store': 'Play Store', 'Web App': 'Web App',
+    'Live Site': 'Live Site', 'Play Store': 'Play Store', 'App Store': 'App Store', 'Web App': 'Web App',
 
     'exp.eyebrow': 'Career Path', 'exp.titleA': 'Work', 'exp.titleB': 'Experience',
 
@@ -46,7 +46,7 @@ const UI = {
     'hero.available': 'متاح للمشاريع',
     'hero.hello': 'مرحباً', 'hero.im': 'أنا', 'hero.name': 'شهير',
     'hero.titleL1': 'مطوّر', 'hero.titleL2': 'متكامل',
-    'hero.intro': 'أبني تطبيقات ويب وموبايل يستخدمها أكثر من 50 ألف شخص — وأعمل حالياً على برمجيات العمليات الميدانية في الرياض.',
+    'hero.intro': 'أبني تطبيقات ويب وموبايل يستخدمها أكثر من 50 ألف شخص بخبرة تفوق 6 سنوات — وأعمل حالياً على برمجيات العمليات الميدانية في الرياض.',
     'hero.ctaProject': 'لديك مشروع؟', 'hero.ctaResume': 'سيرتي الذاتية',
     'hero.bottomWork': 'عرض أعمالي', 'hero.bottomChat': 'الدردشة مع الذكاء الاصطناعي', 'hero.bottomTouch': 'تواصل معي',
 
@@ -58,7 +58,7 @@ const UI = {
     'projects.filter.all': 'الكل', 'projects.filter.web': 'ويب', 'projects.filter.mobile': 'موبايل',
     'projects.viewDetails': 'عرض التفاصيل', 'projects.underConstruction': 'قيد الإنشاء',
     'projects.keyHighlights': 'أبرز النقاط', 'projects.techStack': 'التقنيات',
-    'Live Site': 'الموقع المباشر', 'Play Store': 'متجر جوجل بلاي', 'Web App': 'تطبيق ويب',
+    'Live Site': 'الموقع المباشر', 'Play Store': 'متجر جوجل بلاي', 'App Store': 'آب ستور', 'Web App': 'تطبيق ويب',
 
     'exp.eyebrow': 'المسار المهني', 'exp.titleA': 'الخبرة', 'exp.titleB': 'العملية',
 
@@ -86,7 +86,7 @@ const LISTS = {
 const AR = {
   personal: {
     title: 'مطوّر متكامل · ريأكت و ريأكت نيتف',
-    summary: 'مطوّر متكامل يتمتّع بخمس سنوات في إطلاق تطبيقات الويب والموبايل إلى الإنتاج. بنيتُ منصّات قانونية مدعومة بالذكاء الاصطناعي، وأنظمة مدارس متعدّدة المستأجرين، وأدوات للعمليات الميدانية — تطبيقات يستخدمها أشخاص حقيقيون، خمسون ألفاً منهم على منصّة واحدة فقط. أعمل اليوم في الرياض على بناء برمجيات الموظّفين والعمليات الميدانية لشركة سند. ما يهمّني أكثر هو الجزء غير اللامع: تطبيقات تبقى سريعة، وتصمد أمام الشبكات الضعيفة، ولا تتعطّل في الميدان.',
+    summary: 'مطوّر متكامل يتمتّع بست سنوات في إطلاق تطبيقات الويب والموبايل إلى الإنتاج. بنيتُ منصّات قانونية مدعومة بالذكاء الاصطناعي، وأنظمة مدارس متعدّدة المستأجرين، وأدوات للعمليات الميدانية — تطبيقات يستخدمها أشخاص حقيقيون، خمسون ألفاً منهم على منصّة واحدة فقط. أعمل اليوم في الرياض على بناء برمجيات الموظّفين والعمليات الميدانية لشركة سند. ما يهمّني أكثر هو الجزء غير اللامع: تطبيقات تبقى سريعة، وتصمد أمام الشبكات الضعيفة، ولا تتعطّل في الميدان.',
     location: 'الرياض، السعودية',
     statsLabels: ['سنوات الخبرة', 'المستخدمون', 'المشاريع المُنجزة', 'المؤسّسات'],
   },
@@ -102,8 +102,8 @@ const AR = {
     {
       role: 'مطوّر متكامل', location: 'الرياض، السعودية', period: 'يناير 2026 – حتى الآن', type: 'دوام كامل',
       highlights: [
-        'بنيتُ بوابة الخدمة الذاتية للموظّفين ESS ‏(ريأكت + نود.جي إس) مع تسجيل دخول موحّد كيك لوك وتكامل أودو HR',
-        'بنيتُ تطبيق سند للموبايل — تطبيق عمليات ميدانية بـ ريأكت نيتف لمسارات إف إل إم و سي آي تي',
+        'بنيتُ mySanid — بوابة وتطبيق الخدمة الذاتية للموظّفين (ريأكت + نود.جي إس) مع تسجيل دخول موحّد كيك لوك وتكامل أودو HR',
+        'بنيتُ Sanid-360 — تطبيق عمليات ميدانية بـ ريأكت نيتف لمسارات إف إل إم و سي آي تي',
         'نفّذتُ تنقّلاً ديناميكياً مُداراً من الخادم، وإدارة للتذاكر والرحلات، وقوائم تحقّق',
         'هندستُ رفعاً قابلاً للاستئناف للوسائط (تاس + إف تي بي)، وضغط الفيديو، والتعامل مع وضع عدم الاتصال',
       ],
@@ -129,7 +129,7 @@ const AR = {
     },
   ],
   projects: {
-    'Sanid Mobile App': {
+    'Sanid-360': {
       subtitle: 'تطبيق عمليات ميدانية', period: 'مارس 2026 – حتى الآن',
       description: 'احتاج الفنّيون الميدانيون تطبيقاً واحداً لمهمّتين مختلفتين تماماً (إف إل إم و سي آي تي). فبدلاً من بناءين منفصلين، يُدار التنقّل نفسه من الخادم ويُعاد بناؤه حسب الدور. إضافةً إلى ذلك: رفع قابل للاستئناف للشبكات الضعيفة في مواقع العمل، وإدارة للرحلات والتذاكر مع مرشّحات إس إل إيه، ودعم كامل للعربية و آر تي إل.',
       highlights: [
@@ -140,7 +140,7 @@ const AR = {
       ],
       stats: { workflows: 'إف إل إم و سي آي تي', platform: 'آي أو إس و أندرويد' },
     },
-    'ESS Portal': {
+    'mySanid': {
       subtitle: 'بوابة الخدمة الذاتية للموظّفين', period: 'يناير 2026 – مارس 2026',
       description: 'لم يكن لدى الموظّفين مكان واحد للاطّلاع على بياناتهم في الموارد البشرية. بنيتُ بوابة خدمة ذاتية مُحوّلة إلى دوكر تربط تسجيل الدخول الموحّد كيك لوك بنظام أودو لإدارة الموارد البشرية — تسجيل دخول آمن واحد لكشوف الرواتب والإجازات والحضور والمصروفات والسياسات والمستندات، مع بثّ ملفّات بي دي إف مباشرةً من المصدر.',
       highlights: [

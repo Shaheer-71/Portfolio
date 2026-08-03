@@ -22,7 +22,7 @@ function highlight(text) {
 const codeLinesEn = [
   { key: 'name',        value: '"Muhammad Shaheer Gul"',        color: 'var(--text)' },
   { key: 'role',        value: '"Full Stack & Mobile Dev"',      color: 'var(--text)' },
-  { key: 'experience',  value: '"5+ years"',                    color: 'var(--text)' },
+  { key: 'experience',  value: '"6+ years"',                    color: 'var(--text)' },
   { key: 'languages',   value: '["JavaScript", "TypeScript", ".NET"]', color: 'var(--text)' },
   { key: 'frameworks',  value: '["React", "React Native", "Node.js",', color: 'var(--text)', multi: true },
   { key: null,          value: ' ".NET MVC", "EF Core"], and 5+ more', color: 'var(--text)', multi: true },
@@ -37,7 +37,7 @@ const codeLinesEn = [
 const codeLinesAr = [
   { key: 'الاسم',       value: '"Muhammad Shaheer Gul"',               color: 'var(--text)' },
   { key: 'المسمى',      value: '"Full Stack & Mobile Dev"',            color: 'var(--text)' },
-  { key: 'الخبرة',      value: '"+5 years"',                           color: 'var(--text)' },
+  { key: 'الخبرة',      value: '"+6 years"',                           color: 'var(--text)' },
   { key: 'اللغات',      value: '["JavaScript", "TypeScript", ".NET"]', color: 'var(--text)' },
   { key: 'الأطر',       value: '["React", "React Native", "Node.js",', color: 'var(--text)', multi: true },
   { key: null,          value: ' ".NET MVC", "EF Core"], and 5+ more', color: 'var(--text)', multi: true },
