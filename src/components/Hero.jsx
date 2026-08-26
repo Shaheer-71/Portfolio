@@ -4,7 +4,7 @@ import { ArrowRight, Mail, Sparkles } from 'lucide-react'
 import GridBg from './ParticlesBg'
 import { personal, skills } from '../data/portfolio'
 import { useI18n } from '../i18n'
-import profileImg from '../data/image-2-cutout.png'
+import profileImg from '../data/image-3-cutout.png'
 
 // Flatten every skill from the data into one de-duplicated list
 const allSkills = [...new Set(skills.flatMap(group => group.items.map(item => item.name)))]
